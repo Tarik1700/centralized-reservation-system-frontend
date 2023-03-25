@@ -5,14 +5,16 @@ import SearchInput from "./SearchInput";
 import Popular from "./Popular";
 
 
-function Render() {
+
+  const Render = () => {
+    
   return (
     <div>
       <Nav></Nav>
       <SearchInput/>
-      <Popular/>
+      <Popular></Popular>
     </div>
-  )
+  );
 }
 
-export default Render
+export default Render;
