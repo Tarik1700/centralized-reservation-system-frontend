@@ -1,11 +1,13 @@
-import React, { useState } from "react";
 import { Carousel } from "flowbite-react";
 import { TwButton } from "../../components/TwButton/TwButton";
 
 
 const ImageSlider = () => {
   return (
-    <div className="relative">
+    <>
+<h3 className="text-2xl text-left px-3 text-black pb-3">Popular</h3>
+    <div className="relative px-3">
+      
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
         <Carousel>
           <img
@@ -34,9 +36,12 @@ const ImageSlider = () => {
         </div>
         <div className="absolute bottom-0 left-0 mb-4 ml-4">
         <p className="text-white ">Image Label</p>
-      </div>
+        </div>
       </div>
     </div>
+    <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+
+    </>
   );
 };
 
