@@ -28,9 +28,9 @@ import Slider from "./Slider";
       
   return (
     <div>
-      <Nav></Nav>
+      <Nav/>
       <SearchInput/>
-      <Slider slides={slides}></Slider>
+      <Slider slides={slides}/>
       <Cards  imgAlt="Meaningful alt text "
         imgSrc="/Images/sejo.png"
         title="Brajlović"

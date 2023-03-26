@@ -34,8 +34,8 @@ const Slider: React.FC<Props> = ({ slides }) => {
             <div className="absolute bottom-0 left-0 p-3 pb-6">
               <h3 className="text-xl font-bold">{slides[currentSlide].title}</h3>
             </div>
-            <div className="absolute bottom-0 right-0 p-3">
-              <TwButton variation="primary">{slides[currentSlide].buttonText}</TwButton>
+            <div >
+              <TwButton variation="primary" color="#157635"  className="absolute p-1 bottom-7 right-0 w-55 ">{slides[currentSlide].buttonText}</TwButton>
             </div>
           </div>
           <br />
@@ -51,9 +51,10 @@ const Slider: React.FC<Props> = ({ slides }) => {
             onClick={() => handleSlideChange(index)}
           />
         ))}
+        
       </div>
-      <hr className="w-auto h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"/>
-
+      
+     
     </>
 
   );

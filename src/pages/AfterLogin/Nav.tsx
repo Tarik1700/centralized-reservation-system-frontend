@@ -17,7 +17,7 @@ const Nav = () => {
                 rounded={true}
               />
             }
-          ></Dropdown>
+          />
         </div>
         <div className="flex items-center md:order-1">
           <img
@@ -39,7 +39,7 @@ const Nav = () => {
                 rounded={true}
               />
             }
-          ></Dropdown>
+          />
         </div>
       </Navbar>
     </div>

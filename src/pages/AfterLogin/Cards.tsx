@@ -22,9 +22,9 @@ export const TwCard = ({
 }: CardProps) => {
   return (
     <>
-    <h2 className="text-2xl text-left px-3 pb-3 text-black">Restaurants</h2>
-    
-    <div className="flex justify-center items-center">
+
+    <h2 className="text-2xl text-left px-3 pb-3 text-black">Restaurants</h2> 
+    <div className=" px-3 flex justify-center items-center">
       <div className="max-w-sm w-full lg:w-1/2">
         <Card imgAlt={imgAlt} imgSrc={imgSrc}>
           <div className="flex flex-col">
