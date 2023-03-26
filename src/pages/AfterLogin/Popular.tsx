@@ -5,7 +5,7 @@ import { TwButton } from "../../components/TwButton/TwButton";
 const ImageSlider = () => {
   return (
     <>
-<h3 className="text-2xl text-left px-3 text-black pb-3">Popular</h3>
+<h3 className="text-2xl text-left px-3 text-black pb-3 pt-3">Popular</h3>
     <div className="relative px-3">
       
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
