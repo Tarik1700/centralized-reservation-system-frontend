@@ -13,6 +13,7 @@ export enum ToastMessageType {
   CHANGE_STATUS,
   ERROR,
   CUSTOM_ERROR,
+  CUSTOM_SUCCESS,
 }
 
 const defaultToastOptions: ToastOptions = {
@@ -65,6 +66,8 @@ export class ToastHelper {
       case ToastMessageType.ERROR:
         return "An error occured. Please try again!";
       case ToastMessageType.CUSTOM_ERROR:
+        return `${object}`;
+      case ToastMessageType.CUSTOM_SUCCESS:
         return `${object}`;
       default:
         return "Toast message!";

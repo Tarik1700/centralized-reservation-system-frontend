@@ -4,6 +4,7 @@ import {
   ToastMessageType,
   ToastType,
 } from "../../helpers/ToastHelper";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,11 +14,11 @@ const Login = () => {
   const correctPassword = "password";
 
   const notificationSuccess = () => {
-    ToastHelper.showToast("Login", ToastType.SUCCESS, ToastMessageType.CREATE);
+    ToastHelper.showToast("Login successful.", ToastType.SUCCESS, ToastMessageType.CUSTOM_SUCCESS);
   };
 
   const notificationError = () => {
-    ToastHelper.showToast("Login", ToastType.ERROR, ToastMessageType.ERROR);
+    ToastHelper.showToast("Incorrect credentals. Please try again.", ToastType.ERROR, ToastMessageType.CUSTOM_ERROR);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
