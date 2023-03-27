@@ -14,11 +14,19 @@ const Login = () => {
   const correctPassword = "password";
 
   const notificationSuccess = () => {
-    ToastHelper.showToast("Login successful.", ToastType.SUCCESS, ToastMessageType.CUSTOM);
+    ToastHelper.showToast(
+      "Login successful.",
+      ToastType.SUCCESS,
+      ToastMessageType.CUSTOM
+    );
   };
 
   const notificationError = () => {
-    ToastHelper.showToast("Incorrect credentals. Please try again.", ToastType.ERROR, ToastMessageType.CUSTOM);
+    ToastHelper.showToast(
+      "Incorrect credentals. Please try again.",
+      ToastType.ERROR,
+      ToastMessageType.CUSTOM
+    );
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

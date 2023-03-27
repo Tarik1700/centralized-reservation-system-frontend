@@ -12,7 +12,7 @@ export enum ToastMessageType {
   DELETE,
   CHANGE_STATUS,
   ERROR,
-  CUSTOM
+  CUSTOM,
 }
 
 const defaultToastOptions: ToastOptions = {
