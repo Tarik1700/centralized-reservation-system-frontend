@@ -62,7 +62,7 @@ const TutorialPage = () => {
           buttonToOpenModal={
             <TwButton
               variation="primary"
-              color="#157635"
+              color="black"
               onClick={() => setIsOpen(true)}
             >
               Open modal
