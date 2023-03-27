@@ -1,4 +1,4 @@
-import Axios, { AxiosInstance, AxiosRequestHeaders, Method } from "axios";
+import Axios, { AxiosInstance, Method } from "axios";
 import { get, cloneDeep } from "lodash";
 import * as qs from "qs";
 import { ApiEndpoint, ENDPOINTS } from "./endpoints";
