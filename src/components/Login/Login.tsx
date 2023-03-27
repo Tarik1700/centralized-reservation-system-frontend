@@ -5,6 +5,8 @@ import {
   ToastType,
 } from "../../helpers/ToastHelper";
 import "react-toastify/dist/ReactToastify.css";
+import { InputWithIcon } from "../InputWithIcon/InputWithIcon";
+import { TwButton } from "../TwButton/TwButton";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -60,7 +62,7 @@ const Login = () => {
               action="#"
             >
               <div>
-                <input
+                <InputWithIcon
                   type="email"
                   name="email"
                   id="large-input"
@@ -71,10 +73,17 @@ const Login = () => {
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     setEmail(event.target.value)
                   }
+                  inputBaseClasses="text-gray-900 border-gray-300 bg-gray-50"
+                  inputErrorClasses="border-red-500"
+                  inputSuccessClasses="border-green-500"
+                  labelBaseClasses="text-gray-900"
+                  labelErrorClasses="text-red-500"
+                  labelSuccessClasses="text-green-500"
+                  inputSizing="py-4 px-4"
                 />
               </div>
               <div>
-                <input
+                <InputWithIcon
                   type="password"
                   name="password"
                   id="large-input"
@@ -85,14 +94,23 @@ const Login = () => {
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     setPassword(event.target.value)
                   }
+                  inputBaseClasses="text-gray-900 border-gray-300 bg-gray-50"
+                  inputErrorClasses="border-red-500"
+                  inputSuccessClasses="border-green-500"
+                  labelBaseClasses="text-gray-900"
+                  labelErrorClasses="text-red-500"
+                  labelSuccessClasses="text-green-500"
+                  inputSizing="py-4 px-4"
                 />
               </div>
-              <button
+              <TwButton
                 type="submit"
-                className="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                variation="primary"
+                className="w-full"
+                color="#147234"
               >
                 Log In
-              </button>
+              </TwButton>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account?{" "}
                 <a
