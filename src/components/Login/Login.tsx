@@ -25,7 +25,7 @@ const Login = () => {
 
   const notificationError = () => {
     ToastHelper.showToast(
-      "Incorrect credentals. Please try again.",
+      "Incorrect credentials. Please try again.",
       ToastType.ERROR,
       ToastMessageType.CUSTOM
     );
