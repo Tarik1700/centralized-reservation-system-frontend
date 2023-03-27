@@ -37,8 +37,8 @@ export const TwCard = ({
               </p>
             </div>
             {buttonLabel && buttonOnClick && (
-              <div className="flex justify-between">
-                <div className="flex-grow">
+              <div className="flex justify-between ">
+                <div className="flex-grow ">
                   <TwButton variation="primary" color={buttonColor} onClick={buttonOnClick}>
                     {buttonLabel}
                   </TwButton>
