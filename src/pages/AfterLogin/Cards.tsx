@@ -1,5 +1,5 @@
-import { Card } from "flowbite-react";
-import { TwButton } from "../../components/TwButton/TwButton";
+import { Card } from 'flowbite-react';
+import { TwButton } from '../../components/TwButton/TwButton';
 
 type CardProps = {
   imgAlt?: string;
@@ -22,33 +22,36 @@ export const TwCard = ({
 }: CardProps) => {
   return (
     <>
-
-    <h2 className="text-2xl text-left px-3 pb-3 text-black">Restaurants</h2> 
-    <div className=" px-3 flex justify-center items-center">
-      <div className="max-w-sm w-full lg:w-1/2">
-        <Card imgAlt={imgAlt} imgSrc={imgSrc}>
-          <div className="flex flex-col">
-            <div className="flex-grow">
-              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {title}
-              </h5>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                {description}
-              </p>
-            </div>
-            {buttonLabel && buttonOnClick && (
-              <div className="flex justify-between ">
-                <div className="flex-grow ">
-                  <TwButton variation="primary" color={buttonColor} onClick={buttonOnClick}>
-                    {buttonLabel}
-                  </TwButton>
-                </div>
+      <h2 className="text-2xl text-left px-3 pb-3 text-black">Restaurants</h2>
+      <div className=" px-3 flex justify-center items-center">
+        <div className="max-w-sm w-full lg:w-1/2">
+          <Card imgAlt={imgAlt} imgSrc={imgSrc}>
+            <div className="flex flex-col">
+              <div className="flex-grow">
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {title}
+                </h5>
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                  {description}
+                </p>
               </div>
-            )}
-          </div>
-        </Card>
+              {buttonLabel && buttonOnClick && (
+                <div className="flex justify-between ">
+                  <div className="flex-grow ">
+                    <TwButton
+                      variation="primary"
+                      color={buttonColor}
+                      onClick={buttonOnClick}
+                    >
+                      {buttonLabel}
+                    </TwButton>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Card>
+        </div>
       </div>
-    </div>
     </>
   );
 };

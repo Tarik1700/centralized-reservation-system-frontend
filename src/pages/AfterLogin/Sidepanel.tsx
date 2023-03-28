@@ -29,15 +29,15 @@ const Sidepanel = () => {
 
   return (
     <div>
-      <button onClick={toggleSidebar}>
+      <button onClick={toggleSidebar} className="ml-2 flex">
         {isOpen ? (
-          <HiX className="text-2xl" />
+          <HiX className="text-2xl " />
         ) : (
-          <HiMenu className="text-2xl" />
+          <HiMenu className="text-2xl " />
         )}
       </button>
       {isOpen && (
-        <div className="fixed top-16 left-0 w-full h-full bg-gray-800 bg-opacity-50 z-50">
+        <div className="fixed top-[60px] left-0 w-full h-full bg-gray-800 bg-opacity-50 z-50">
           <div className="max-w-xs h-full bg-white overflow-auto">
             <Sidebar aria-label="Sidebar with multi-level dropdown example">
               <Sidebar.Items>

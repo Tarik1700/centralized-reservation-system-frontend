@@ -1,15 +1,11 @@
 import Login from "./components/Login/Login";
 import "./App.css";
 import Render from "./pages/AfterLogin/Render";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBarLayout from "./components/NavBarLayout/NavBarLayout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TOKEN from "./helpers/api/token";
+import RestaurantInformation from "./pages/RestaurantInformation/RestaurantInformation";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(TOKEN.get());
@@ -31,7 +27,11 @@ function App() {
             {loggedUser && (
               <Route element={<NavBarLayout />}>
                 <Route path="/dashboard" element={<Render />} />
-                {/*  <Route path="/dashboard/restaurant/:id" element={< />} />   for Nedos page */}
+                <Route
+                  /*path="/dashboard/restaurant/:id"  This is the path that we need to use in the future  */
+                  path="/dashboard/restaurant"
+                  element={<RestaurantInformation />}
+                />
 
                 {/* Future routes */}
                 {/* 
