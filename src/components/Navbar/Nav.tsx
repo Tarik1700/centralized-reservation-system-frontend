@@ -8,14 +8,6 @@ const Nav = () => {
       <Navbar fluid={true} rounded={true}>
         <Sidepanel />
         <div className="hidden md:flex md:items-center md:order-2">
-          <div className="w-24 ">
-            <img
-              src={logoWithText}
-              className="mr-3 h-6 sm:h-9"
-              alt="Flowbite Logo"
-            />
-          </div>
-
           <Dropdown
             arrowIcon={false}
             inline={true}
@@ -28,15 +20,15 @@ const Nav = () => {
             }
           />
         </div>
-        {/* <div className="flex items-center md:order-1">
+        {<div className="flex items-center md:order-1">
           <img
-            src={{}}
+            src={logoWithText}
             className="mr-3 h-6 sm:h-9"
-            alt="Flowbite Logo"
+            alt="Flowbit2"
             style={{ marginLeft: 0 }}
           />
           <span className="ml-auto block sm:inline">On Time</span>
-        </div> */}
+        </div> }
         <div className="flex items-center md:hidden">
           <Dropdown
             arrowIcon={false}
