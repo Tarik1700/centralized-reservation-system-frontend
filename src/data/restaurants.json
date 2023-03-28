@@ -1,0 +1,22 @@
+[
+  {
+    "id": "29ijmd-2dsadi2-asdkl2",
+    "name": "Saray Bosna",
+    "address": "Butmirska cesta 21, Ilidža",
+    "description": "Here are the biggest enterprise technolog acquisitions of 2021 so far, in reverse chronological order. Here are the biggest enterprise technology acquisitions of 2021 so far.",
+    "menu": [
+      {
+        "name": "Margherita",
+        "price": 5,
+        "image": "../../assets/images/restaurant/restaurant-menu/pizza.png"
+      },
+      { "name": "Hamburger", "price": 8, "image": "" },
+      { "name": "Pancake", "price": 7, "image": "" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1586999768265-24af89630739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+    ]
+  }
+]
