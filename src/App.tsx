@@ -1,13 +1,14 @@
-import TutorialPage from "./pages/TutorialPage";
-import "./App.css";
-import { TwButton } from "./components/TwButton/TwButton";
-import Nav from "./pages/AfterLogin/Nav";
-import Render from "./pages/AfterLogin/Render";
+import './App.css';
+import Nav from './components/Navbar/Nav';
+import RestaurantInformation from './pages/RestaurantInformation/RestaurantInformation';
 
 function App() {
   return (
     <div className="App">
-      <Render/>
+      <Nav />
+
+      {/* <Render /> */}
+      <RestaurantInformation />
     </div>
   );
 }
