@@ -1,5 +1,6 @@
-import { Navbar, Dropdown, Avatar } from 'flowbite-react';
-import Sidepanel from './Sidepanel';
+import { Navbar, Dropdown, Avatar } from "flowbite-react";
+import Sidepanel from "./Sidepanel";
+import logoWithoutText from "../../components/svg/logoWithoutText.svg";
 
 const Nav = () => {
   return (
@@ -21,7 +22,7 @@ const Nav = () => {
         </div>
         <div className="flex items-center md:order-1">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src={logoWithoutText}
             className="mr-3 h-6 sm:h-9"
             alt="Flowbite Logo"
             style={{ marginLeft: 0 }}
