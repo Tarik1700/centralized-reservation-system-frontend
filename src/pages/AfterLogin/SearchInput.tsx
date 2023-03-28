@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const SearchInput = () => {
   return (
@@ -28,7 +28,6 @@ const SearchInput = () => {
         />
       </div>
       <hr className="h-px px-3 my-7 bg-gray-200 border-0 dark:bg-gray-700" />
-
     </form>
   );
 };
