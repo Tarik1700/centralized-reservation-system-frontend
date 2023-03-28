@@ -1,6 +1,6 @@
-import { Navbar, Dropdown, Avatar } from 'flowbite-react';
-import Sidepanel from '../../pages/AfterLogin/Sidepanel';
-import LogoWithText from '../svg/LogoWithText.svg';
+import { Navbar, Dropdown, Avatar } from "flowbite-react";
+import Sidepanel from "../../pages/AfterLogin/Sidepanel";
+import logoWithText from "../svg/logoWithText.svg";
 
 const Nav = () => {
   return (
@@ -10,7 +10,7 @@ const Nav = () => {
         <div className="hidden md:flex md:items-center md:order-2">
           <div className="w-24 ">
             <img
-              src={LogoWithText}
+              src={logoWithText}
               className="mr-3 h-6 sm:h-9"
               alt="Flowbite Logo"
             />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ToastHelper,
   ToastMessageType,
@@ -7,10 +7,13 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { InputWithIcon } from "../InputWithIcon/InputWithIcon";
 import { TwButton } from "../TwButton/TwButton";
+import { useNavigate } from "react-router-dom";
+import TOKEN from "../../helpers/api/token";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const correctEmail = "user@example.com";
   const correctPassword = "password";
@@ -35,11 +38,18 @@ const Login = () => {
     event.preventDefault();
 
     if (email === correctEmail && password === correctPassword) {
-      notificationSuccess();
+      TOKEN.set("testtoken");
+      navigate("/dashboard");
     } else {
       notificationError();
     }
   };
+
+  useEffect(() => {
+    if (TOKEN.get()) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Sidebar } from 'flowbite-react';
+import React, { useState } from "react";
+import { Sidebar } from "flowbite-react";
 import {
   HiTable,
   HiChartPie,
@@ -9,13 +9,22 @@ import {
   HiArrowSmRight,
   HiMenu,
   HiX,
-} from 'react-icons/hi';
+  HiOutlineLogout,
+} from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+import TOKEN from "../../helpers/api/token";
 
 const Sidepanel = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogOut = () => {
+    TOKEN.remove();
+    navigate("/login");
   };
 
   return (
@@ -56,6 +65,9 @@ const Sidepanel = () => {
                 <Sidebar.ItemGroup>
                   <Sidebar.Item href="#" icon={HiChartPie}>
                     Upgrade to Pro
+                  </Sidebar.Item>
+                  <Sidebar.Item icon={HiOutlineLogout} onClick={handleLogOut}>
+                    Log out
                   </Sidebar.Item>
                 </Sidebar.ItemGroup>
               </Sidebar.Items>
