@@ -1,7 +1,7 @@
 import { Navbar, Dropdown, Avatar } from "flowbite-react";
 import Sidepanel from "../../pages/AfterLogin/Sidepanel";
-import logoWithText from "../svg/logoWithText.svg";
-
+import logoWithoutText from "../svg/logoWithoutText.svg";
+import logoOnlyText from "../svg/logoOnlyText.svg";
 const Nav = () => {
   return (
     <div className="border-b-[#B3B3B3] border-b-[1px] shadow-md">
@@ -21,13 +21,12 @@ const Nav = () => {
           />
         </div>
         {<div className="flex items-center md:order-1">
-          <img
-            src={logoWithText}
-            className="mr-3 h-6 sm:h-9"
-            alt="Flowbit2"
+        <img
+            src={logoWithoutText}
+            className="w-10 h-12 pt-1 rounded-full mr-1"
+            alt="LOGOONY TEXT"
             style={{ marginLeft: 0 }}
-          />
-          <span className="ml-auto block sm:inline">On Time</span>
+          />    
         </div> }
         <div className="flex items-center md:hidden">
           <Dropdown
@@ -36,7 +35,7 @@ const Nav = () => {
             label={
               <Avatar
                 alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                img="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
                 rounded={true}
               />
             }
