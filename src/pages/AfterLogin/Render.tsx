@@ -9,16 +9,19 @@ const Render = () => {
   const slides = [
     {
       imageUrl:
-        'https://images.unsplash.com/photo-1544427920-c49ccfb85579?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1422&q=80',
-      title: 'Saraybosna',
-      buttonText: 'Button 1',
+        'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      title: 'Manolo',
     },
 
     {
       imageUrl:
-        'https://images.unsplash.com/photo-1544427920-c49ccfb85579?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1422&q=80',
-      title: 'Seyo',
-      buttonText: 'Button 2',
+        'https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+      title: 'Maslina',
+    },
+    {
+      imageUrl:
+        'https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+      title: 'Dos Hermanos',
     },
   ];
 
@@ -37,6 +40,7 @@ const Render = () => {
       />
     </div>
   );
+};
 };
 
 export default Render;

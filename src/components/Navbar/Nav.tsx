@@ -51,6 +51,7 @@ const Nav = () => {
           />
         </div>
       </Navbar>
+      <hr className="bg-gray-300 hover:bg-gray-500" />
     </div>
   );
 };
