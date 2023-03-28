@@ -1,13 +1,19 @@
 import Login from "./components/Login/Login";
 import "./App.css";
 import Render from "./pages/AfterLogin/Render";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import NavBarLayout from "./components/NavBarLayout/NavBarLayout";
 import { useEffect, useState } from "react";
 import TOKEN from "./helpers/api/token";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(TOKEN.get());
+
   const redirectUserToLogin = () => {
     const path = window.location.pathname;
     if (!loggedUser) {

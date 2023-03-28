@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ToastHelper,
   ToastMessageType,
@@ -44,6 +44,12 @@ const Login = () => {
       notificationError();
     }
   };
+
+  useEffect(() => {
+    if (TOKEN.get()) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
