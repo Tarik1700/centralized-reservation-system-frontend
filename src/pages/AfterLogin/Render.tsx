@@ -41,6 +41,4 @@ const Render = () => {
     </div>
   );
 };
-};
-
 export default Render;

@@ -9,7 +9,7 @@ const Slider = ({ images }: IRestaurantImages) => {
     <img src={restaurantImage} alt="..." className="object-cover h-full " />
   ));
   return (
-    <Carousel slide={false} className="" rightControl={true}>
+    <Carousel slide={false} className="">
       {restaurantImages}
     </Carousel>
   );
