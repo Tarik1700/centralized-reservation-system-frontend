@@ -15,9 +15,9 @@ const Render = () => {
       <Slider slides={slides} />
       <Cards
         imgAlt="Meaningful alt text "
-        imgSrc="/Images/sejo.png"
-        title="Brajlović"
-        description="Bravo majstore, glaj kajmaka"
+        imgSrc="/Images/fol.png"
+        title="Restoran Park Prinčeva"
+        description="Place that you must visit in Sarajevo."
         buttonLabel="Reserve"
         buttonColor="#157635"
         buttonOnClick={() => console.log("Button clicked!")}

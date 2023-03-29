@@ -63,7 +63,7 @@ const Slider: React.FC<Props> = ({ slides }) => {
             />
           ))}
         </div>
-        <hr className="h-px px-3 my-5 bg-gray-200 border-0 dark:bg-gray-700" />
+        <hr className="h-px px-3 my-2 bg-gray-200 border-0 dark:bg-gray-700" />
       </div>
     </>
   );

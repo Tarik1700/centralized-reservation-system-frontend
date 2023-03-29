@@ -4,7 +4,7 @@ const SearchInput = () => {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="max-w-md px-4 mx-auto mt-12"
+      className="max-w-md px-4 mx-auto mt-7"
     >
       <div className="relative">
         <svg
@@ -27,7 +27,7 @@ const SearchInput = () => {
           className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
         />
       </div>
-      <hr className="h-px px-3 my-7 bg-gray-200 border-0 dark:bg-gray-700" />
+      <hr className="h-px px-3 my-5 bg-gray-200 border-0 dark:bg-gray-700" />
     </form>
   );
 };
