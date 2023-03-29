@@ -43,7 +43,7 @@ const ModalGeneric = ({
     '6xl': string;
     '7xl': string;  */
         size={size}
-        className={twMerge("font-inter", modalClassName)}
+        className={twMerge("", modalClassName)}
         dismissible={true}
         show={isOpen}
         onClose={() => setOpen(false)}
@@ -59,8 +59,8 @@ const ModalGeneric = ({
         <Modal.Body>{children}</Modal.Body>
         <Modal.Footer
           className={twMerge(
-            modalFooterClassName,
-            "border-t-[1px] border-solid border-gray-200 justify-end"
+            "border-t-[1px] border-solid border-gray-200 justify-end",
+            modalFooterClassName
           )}
         >
           {footer}
