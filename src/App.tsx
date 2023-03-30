@@ -1,6 +1,6 @@
 import Login from "./components/Login/Login";
 import "./App.css";
-import Render from "./pages/AfterLogin/Render";
+import Render from "./components/AfterLogin/Render";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBarLayout from "./components/NavBarLayout/NavBarLayout";
 import { useState } from "react";

@@ -1,5 +1,5 @@
 import { Navbar, Dropdown, Avatar } from "flowbite-react";
-import Sidepanel from "../../pages/AfterLogin/Sidepanel";
+import Sidepanel from "../AfterLogin/Sidepanel";
 import logoWithoutText from "../svg/logoWithoutText.svg";
 import logoOnlyText2 from "../svg/logoOnlyText2.svg";
 const Nav = () => {
@@ -14,7 +14,7 @@ const Nav = () => {
             label={
               <Avatar
                 alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                img="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
                 rounded={true}
               />
             }
