@@ -12,7 +12,7 @@ const Render = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="bg-[#FBFBF9] pb-4">
       <SearchInput />
       <Slider slides={slides} />
       <Cards
