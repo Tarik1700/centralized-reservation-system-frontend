@@ -8,10 +8,18 @@
       {
         "name": "Margherita",
         "price": 5,
-        "image": "../../assets/images/restaurant/restaurant-menu/pizza.png"
+        "image": "/images/restaurant-menu/pizza.png"
       },
-      { "name": "Hamburger", "price": 8, "image": "" },
-      { "name": "Pancake", "price": 7, "image": "" }
+      {
+        "name": "Hamburger",
+        "price": 8,
+        "image": "/images/restaurant-menu/hamburgers.png"
+      },
+      {
+        "name": "Pancake",
+        "price": 7,
+        "image": "/images/restaurant-menu/pancakes.png"
+      }
     ],
     "images": [
       "https://images.unsplash.com/photo-1586999768265-24af89630739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",

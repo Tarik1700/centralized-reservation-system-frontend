@@ -1,33 +1,30 @@
-import "react-toastify/dist/ReactToastify.css";
-import informationAsset from "../../assets/images/restaurant/restaurant-details/information.svg";
+import 'react-toastify/dist/ReactToastify.css';
+import informationAsset from '../../assets/images/restaurant/restaurant-details/information.svg';
 
-import pizza from "../../assets/images/restaurant/restaurant-menu/pizza.png";
-import hamburger from "../../assets/images/restaurant/restaurant-menu/hamburgers.png";
-import pancake from "../../assets/images/restaurant/restaurant-menu/pancakes.png";
-import IRestaurantDetails from "../../interfaces/IRestaurantDetails";
-import Menu from "./Menu";
-import IMenu from "../../interfaces/IMenu";
-import Slider from "./Slider";
-import restaurantData from "../../data/restaurants.json";
-import ModalGeneric from "../../components/ModalGeneric/ModalGeneric";
-import { useEffect, useState } from "react";
-import { TwButton } from "../../components/TwButton/TwButton";
+import IRestaurantDetails from '../../interfaces/IRestaurantDetails';
+import Menu from './Menu';
+import IMenu from '../../interfaces/IMenu';
+import Slider from './Slider';
+import restaurantData from '../../data/restaurants.json';
+import ModalGeneric from '../../components/ModalGeneric/ModalGeneric';
+import { useEffect, useState } from 'react';
+import { TwButton } from '../../components/TwButton/TwButton';
 import {
   ToastHelper,
   ToastMessageType,
   ToastType,
-} from "../../helpers/ToastHelper";
-import Datepicker from "tailwind-datepicker-react";
-import { ModalGenericNew } from "../../components/ModalGeneric/ModalGenericNew";
-import { InputWithIcon } from "../../components/InputWithIcon/InputWithIcon";
+} from '../../helpers/ToastHelper';
+import Datepicker from 'tailwind-datepicker-react';
+import { ModalGenericNew } from '../../components/ModalGeneric/ModalGenericNew';
+import { InputWithIcon } from '../../components/InputWithIcon/InputWithIcon';
 
 const RestaurantInformation = () => {
   const restaurant: IRestaurantDetails | undefined = restaurantData.find(
-    (restaurant) => restaurant.id === "29ijmd-2dsadi2-asdkl2"
+    (restaurant) => restaurant.id === '29ijmd-2dsadi2-asdkl2'
   );
   const [isOpen, setIsOpen] = useState(false);
   const [infoIsOpen, setInfoIsOpen] = useState(false);
-  const [numberOfPeople, setNumberOfPeople] = useState("");
+  const [numberOfPeople, setNumberOfPeople] = useState('');
   const [show, setShow] = useState<boolean>(false);
   const handleChange = (selectedDate: Date) => {
     console.log(selectedDate);
@@ -47,7 +44,7 @@ const RestaurantInformation = () => {
 
   const notificationSuccess = () => {
     ToastHelper.showToast(
-      "Reservation",
+      'Reservation',
       ToastType.SUCCESS,
       ToastMessageType.CREATE
     );
@@ -68,9 +65,9 @@ const RestaurantInformation = () => {
     todayBtn: true,
     clearBtn: true,
     //TODO: when we decide what is the max date in advance that someone can reserve, we will set it here to generate automatically based on todays date.
-    maxDate: new Date("2030-01-01"),
-    minDate: new Date("1950-01-01"),
-    language: "en",
+    maxDate: new Date('2030-01-01'),
+    minDate: new Date('1950-01-01'),
+    language: 'en',
   };
 
   return (
@@ -115,7 +112,7 @@ const RestaurantInformation = () => {
                     <b>Address: </b>Butmirska cesta 2
                   </p>
                   <p>
-                    <b>Tel: </b>061 284-832{" "}
+                    <b>Tel: </b>061 284-832{' '}
                   </p>
                   <p>
                     <b>Work hours:</b>
@@ -218,7 +215,7 @@ const RestaurantInformation = () => {
           </p>
         </div>
 
-        <div className="pt-4">
+        <div className="py-4 ">
           <h2 className="text-xl mb-4">Menu</h2>
           <div className="mb-4 bg-white h-80 overflow-scroll rounded-lg shadow-md">
             {menu}

@@ -1,11 +1,11 @@
-import Login from "./components/Login/Login";
-import "./App.css";
-import Render from "./components/AfterLogin/Render";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import NavBarLayout from "./components/NavBarLayout/NavBarLayout";
-import { useState } from "react";
-import TOKEN from "./helpers/api/token";
-import RestaurantInformation from "./pages/RestaurantInformation/RestaurantInformation";
+import Login from './components/Login/Login';
+import './App.css';
+import Render from './components/AfterLogin/Render';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBarLayout from './components/NavBarLayout/NavBarLayout';
+import { useState } from 'react';
+import TOKEN from './helpers/api/token';
+import RestaurantInformation from './pages/RestaurantInformation/RestaurantInformation';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(TOKEN.get());
@@ -13,8 +13,8 @@ function App() {
   const redirectUserToLogin = () => {
     const path = window.location.pathname;
     if (!loggedUser) {
-      if (path !== "/signup" && path !== "/login") {
-        window.location.pathname = "/login";
+      if (path !== '/signup' && path !== '/login') {
+        window.location.pathname = '/login';
       }
     }
   };
@@ -32,7 +32,6 @@ function App() {
                   path="/dashboard/restaurant"
                   element={<RestaurantInformation />}
                 />
-
                 {/* Future routes */}
                 {/* 
                 <Route path="/current-reservations" element={< />} />    
