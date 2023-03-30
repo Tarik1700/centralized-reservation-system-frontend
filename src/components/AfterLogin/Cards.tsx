@@ -1,5 +1,5 @@
 import { Card } from 'flowbite-react';
-import { TwButton } from '../../components/TwButton/TwButton';
+import { TwButton } from '../TwButton/TwButton';
 
 type CardProps = {
   imgAlt?: string;

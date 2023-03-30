@@ -1,4 +1,4 @@
-import Nav from "../../components/Navbar/Nav";
+import Nav from "../Navbar/Nav";
 
 import React from "react";
 import SearchInput from "./SearchInput";

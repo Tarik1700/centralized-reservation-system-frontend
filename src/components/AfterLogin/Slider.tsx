@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TwButton } from '../../components/TwButton/TwButton';
+import { TwButton } from '../TwButton/TwButton';
 
 interface Slide {
   imageUrl: string;
