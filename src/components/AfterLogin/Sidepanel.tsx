@@ -17,6 +17,8 @@ import TOKEN from "../../helpers/api/token";
 const Sidepanel = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const navigateDash = useNavigate();
+
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -42,7 +44,7 @@ const Sidepanel = () => {
             <Sidebar aria-label="Sidebar with multi-level dropdown example">
               <Sidebar.Items>
                 <Sidebar.ItemGroup>
-                  <Sidebar.Item href="#" icon={HiChartPie}>
+                  <Sidebar.Item href="#"onClick={() => navigateDash('/dashboard')} icon={HiChartPie}>
                     Dashboard
                   </Sidebar.Item>
 
