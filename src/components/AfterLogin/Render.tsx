@@ -1,13 +1,15 @@
-import Nav from "../Navbar/Nav";
+import Nav from '../Navbar/Nav';
 
-import React from "react";
-import SearchInput from "./SearchInput";
-import Cards from "./Cards";
-import Slider from "./Slider";
-import restaurantSlides from "../../data/slides.json";
+import React from 'react';
+import SearchInput from './SearchInput';
+import Cards from './Cards';
+import Slider from './Slider';
+import restaurantSlides from '../../data/slides.json';
+import { useNavigate } from 'react-router-dom';
 
 const Render = () => {
   const slides = restaurantSlides;
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -20,7 +22,7 @@ const Render = () => {
         description="Place that you must visit in Sarajevo."
         buttonLabel="Reserve"
         buttonColor="#157635"
-        buttonOnClick={() => console.log("Button clicked!")}
+        buttonOnClick={() => navigate('/dashboard/restaurant')}
       />
     </div>
   );

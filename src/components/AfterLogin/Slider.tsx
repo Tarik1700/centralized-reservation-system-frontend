@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TwButton } from '../TwButton/TwButton';
 
 interface Slide {
@@ -12,6 +13,7 @@ interface Props {
 
 const Slider: React.FC<Props> = ({ slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   const handleSlideChange = (newIndex: number) => {
     setCurrentSlide(newIndex);
@@ -45,7 +47,7 @@ const Slider: React.FC<Props> = ({ slides }) => {
                 variation="primary"
                 color="#157635"
                 className="absolute p-1 bottom-2 right-0 w-55 right-2 "
-                onClick={() => console.log('Button clicked')}
+                onClick={() => navigate('/dashboard/restaurant')}
               >
                 CHECK OUT
               </TwButton>
