@@ -13,6 +13,7 @@ interface IModalGeneric {
   header: string;
   buttonToOpenModal?: React.ReactNode;
   footer: React.ReactNode;
+  position?: string;
 }
 
 const ModalGeneric = ({
@@ -26,6 +27,7 @@ const ModalGeneric = ({
   modalHeaderClassName,
   modalFooterClassName,
   size,
+  position,
 }: IModalGeneric) => {
   return (
     <React.Fragment>
@@ -47,6 +49,7 @@ const ModalGeneric = ({
         dismissible={true}
         show={isOpen}
         onClose={() => setOpen(false)}
+        position={position}
       >
         <Modal.Header
           className={twMerge(
