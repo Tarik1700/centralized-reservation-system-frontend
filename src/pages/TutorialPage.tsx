@@ -1,32 +1,33 @@
-import React from "react";
-import { useState } from "react";
-import ModalGeneric from "../components/ModalGeneric/ModalGeneric";
-import { TwButton } from "../components/TwButton/TwButton";
-import "react-toastify/dist/ReactToastify.css";
+import React from 'react';
+import { useState } from 'react';
+import ModalGeneric from '../components/ModalGeneric/ModalGeneric';
+import { TwButton } from '../components/TwButton/TwButton';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   ToastHelper,
   ToastMessageType,
   ToastType,
-} from "../helpers/ToastHelper";
-import api from "../helpers/api/api.factory";
-import { useQuery } from "react-query";
-import { InputWithIcon } from "../components/InputWithIcon/InputWithIcon";
+} from '../helpers/ToastHelper';
+import api from '../helpers/api/api.factory';
+import { useMutation, useQuery } from 'react-query';
+import { InputWithIcon } from '../components/InputWithIcon/InputWithIcon';
 
 const TutorialPage = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState('');
   //Example of get req
-  const test = useQuery(["get_example"], () => api.fetch("get_example"), {
+  // const test2  = useMutation([''], () => api.fetch("post_example"));
+  const test = useQuery(['get_example'], () => api.fetch('get_example'), {
     onSuccess: () => {
       ToastHelper.showToast(
-        "Reservation",
+        'Reservation',
         ToastType.SUCCESS,
         ToastMessageType.CREATE
       );
     },
     onError: () => {
       ToastHelper.showToast(
-        "Reservation",
+        'Reservation',
         ToastType.ERROR,
         ToastMessageType.ERROR
       );
@@ -36,7 +37,7 @@ const TutorialPage = () => {
   //Example of manual notification calling for success
   const notificationSuccess = () => {
     ToastHelper.showToast(
-      "Reservation",
+      'Reservation',
       ToastType.SUCCESS,
       ToastMessageType.CREATE
     );
@@ -45,7 +46,7 @@ const TutorialPage = () => {
   //Example of manual notification calling for Error, we will usually use them as above in the onSuccess or onError
   const notificationError = () => {
     ToastHelper.showToast(
-      "Reservation",
+      'Reservation',
       ToastType.ERROR,
       ToastMessageType.ERROR
     );

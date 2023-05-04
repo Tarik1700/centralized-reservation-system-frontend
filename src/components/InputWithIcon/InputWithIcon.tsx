@@ -1,7 +1,7 @@
-import classNames from "classnames";
-import { InputHTMLAttributes } from "react";
-import { UseFormRegister, FieldValues } from "react-hook-form";
-import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
+import classNames from 'classnames';
+import { InputHTMLAttributes } from 'react';
+import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 
 type InputProps = {
   id?: string;
@@ -37,7 +37,7 @@ export const InputWithIcon = ({
   disabled,
   label,
   readonly,
-  wrapperClassName = "",
+  wrapperClassName = '',
   register,
   leftIcon,
   rightIcon,
@@ -48,9 +48,10 @@ export const InputWithIcon = ({
   inputErrorClasses,
   inputSuccessClasses,
   inputSizing,
+  required,
   ...props
 }: InputProps) => (
-  <div className={classNames(wrapperClassName, "w-full")}>
+  <div className={classNames(wrapperClassName, 'w-full')}>
     {label ? (
       <label
         htmlFor={id}
@@ -72,6 +73,7 @@ export const InputWithIcon = ({
         value={value}
         readOnly={readonly}
         disabled={disabled}
+        required={required}
         {...(register ? register(name) : {})}
         name={name}
         onChange={onChange}
@@ -81,7 +83,7 @@ export const InputWithIcon = ({
           error && inputErrorClasses,
           !error && value && inputSuccessClasses,
           `bg-transparent text-sm rounded-lg block w-full ${
-            leftIcon ? "pl-10" : "pl-3"
+            leftIcon ? 'pl-10' : 'pl-3'
           } appearance-none focus:outline-none focus:ring-0`
         )}
         placeholder={placeholder}

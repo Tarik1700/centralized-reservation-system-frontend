@@ -6,6 +6,7 @@ import NavBarLayout from './components/NavBarLayout/NavBarLayout';
 import { useState } from 'react';
 import TOKEN from './helpers/api/token';
 import RestaurantInformation from './pages/RestaurantInformation/RestaurantInformation';
+import Register from './components/Register/Register';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(TOKEN.get());
@@ -13,14 +14,14 @@ function App() {
   const redirectUserToLogin = () => {
     const path = window.location.pathname;
     if (!loggedUser) {
-      if (path !== '/signup' && path !== '/login') {
+      if (path !== '/register' && path !== '/login') {
         window.location.pathname = '/login';
       }
     }
   };
 
   return (
-    <div className="App">
+    <div className="App ">
       <Router>
         <Routes>
           <>
@@ -43,7 +44,7 @@ function App() {
               */}
               </Route>
             )}
-
+            <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Login />} />
             {/* 
