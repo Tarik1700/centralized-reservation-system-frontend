@@ -1,10 +1,10 @@
-import Axios, { AxiosInstance, Method } from "axios";
-import { get, cloneDeep } from "lodash";
-import * as qs from "qs";
-import { ApiEndpoint, ENDPOINTS } from "./endpoints";
-import TOKEN from "./token";
+import Axios, { AxiosInstance, Method } from 'axios';
+import { get, cloneDeep } from 'lodash';
+import * as qs from 'qs';
+import { ApiEndpoint, ENDPOINTS } from './endpoints';
+import TOKEN from './token';
 
-const appConfig = { apiUrl: "http://localhost:8080" };
+const appConfig = { apiUrl: 'http://localhost:8080' };
 
 class ApiFactory {
   headers: any;
@@ -23,28 +23,28 @@ class ApiFactory {
     T extends { request: object; response: unknown; requestBody: unknown }
   >(
     endpoint: ApiEndpoint,
-    rawData?: T["request"]
-  ): Promise<T["response"]> => {
+    rawData?: T['request']
+  ): Promise<T['response']> => {
     const data = cloneDeep(rawData);
     const response = this.generateFullUri(this.endpoints[endpoint].uri, data);
     let { url } = response;
     const { removed } = response;
     const method = this.endpoints[endpoint].method as Method;
     if (data) {
-      (removed as unknown as (keyof T["request"])[]).forEach((key) => {
+      (removed as unknown as (keyof T['request'])[]).forEach((key) => {
         if (key in data) delete data[key];
       });
     }
 
-    const body = data as unknown as T["requestBody"];
+    const body = data as unknown as T['requestBody'];
     const token = TOKEN.get();
 
     if (token) {
       this.headers = { Authorization: `Bearer ${token}` };
     }
 
-    if (method === "GET") {
-      const queryString = qs.stringify(body, { arrayFormat: "repeat" });
+    if (method === 'GET') {
+      const queryString = qs.stringify(body, { arrayFormat: 'repeat' });
       if (queryString) {
         url += `?${queryString}`;
       }
@@ -71,7 +71,7 @@ class ApiFactory {
       /{(.*?)}/g,
       (token, name: string) => {
         let value = token;
-        if (typeof data === "object" && data && name in data) {
+        if (typeof data === 'object' && data && name in data) {
           removed.push(name);
           // console.log(endpoint, data, name, get(data, name));
           // value = get(data, name).toString();

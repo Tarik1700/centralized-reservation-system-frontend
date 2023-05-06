@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.27.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -19,8 +20,10 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.7",
     "react-query": "^3.39.3",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.1",
     "tailwind-datepicker-react": "^1.2.3",
     "tailwind-merge": "^1.10.0",
