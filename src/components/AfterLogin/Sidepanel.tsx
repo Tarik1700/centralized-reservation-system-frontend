@@ -13,12 +13,14 @@ import {
 } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import TOKEN from "../../helpers/api/token";
+import { UserState } from "../../features/auth/userSlice";
+import { useSelector } from "react-redux";
 
 const Sidepanel = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const loggedUser: UserState = useSelector((state: any) => state.auth.user);
   const navigate = useNavigate();
   const navigateDash = useNavigate();
-
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -44,12 +46,24 @@ const Sidepanel = () => {
             <Sidebar aria-label="Sidebar with multi-level dropdown example">
               <Sidebar.Items>
                 <Sidebar.ItemGroup>
-                  <Sidebar.Item href="#"onClick={() => navigateDash('/dashboard')} icon={HiChartPie}>
+                  <Sidebar.Item
+                    onClick={() => {
+                      navigateDash("/dashboard");
+                      toggleSidebar();
+                    }}
+                    icon={HiChartPie}
+                  >
                     Dashboard
                   </Sidebar.Item>
 
-                  <Sidebar.Item href="#" icon={HiInbox}>
-                    Inbox
+                  <Sidebar.Item
+                    icon={HiInbox}
+                    onClick={() => {
+                      navigateDash("/create-restaurant");
+                      toggleSidebar();
+                    }}
+                  >
+                    Create Restaurant
                   </Sidebar.Item>
                   <Sidebar.Item href="#" icon={HiUser}>
                     Users
