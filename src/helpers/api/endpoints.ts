@@ -20,7 +20,7 @@ export const ENDPOINTS = {
     method: "GET",
   },
   create_restaurant: {
-    uri: "/restaurants/create",
+    uri: "/restaurants",
     method: "POST",
   },
 };
