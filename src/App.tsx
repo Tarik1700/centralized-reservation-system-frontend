@@ -17,15 +17,6 @@ function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
   const [loading, setLoading] = useState(true);
 
-  const redirectUserToLogin = () => {
-    const path = window.location.pathname;
-    if (!loggedUser) {
-      if (path !== "/register" && path !== "/login") {
-        window.location.pathname = "/login";
-      }
-    }
-  };
-
   const dispatch = useDispatch();
 
   const userInfo = useQuery(
@@ -43,7 +34,15 @@ function App() {
       },
     }
   );
-
+  const redirectUserToLogin = () => {
+    const path = window.location.pathname;
+    console.log(loggedUser);
+    if (!loggedUser && !TOKEN.get()) {
+      if (path !== "/register" && path !== "/login") {
+        window.location.pathname = "/login";
+      }
+    }
+  };
   return (
     <div className="App ">
       <Router>
