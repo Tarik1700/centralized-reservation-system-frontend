@@ -49,6 +49,8 @@ export const InputWithIcon = ({
   inputSuccessClasses,
   inputSizing,
   required,
+  minLength,
+  maxLength,
   ...props
 }: InputProps) => (
   <div className={classNames(wrapperClassName, 'w-full')}>
@@ -74,6 +76,8 @@ export const InputWithIcon = ({
         readOnly={readonly}
         disabled={disabled}
         required={required}
+        minLength={minLength}
+        maxLength={maxLength}
         {...(register ? register(name) : {})}
         name={name}
         onChange={onChange}

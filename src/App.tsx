@@ -13,6 +13,8 @@ import { UserState, setUser } from './features/auth/userSlice';
 import api from './helpers/api/api.factory';
 import CreateRestaurant from './pages/CreateRestaurant';
 import Navbar from './components/Navbar/Navbar';
+import Subscription from './pages/Subscription/Subscription';
+import Payment from './pages/Subscription/Payment';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
@@ -27,11 +29,11 @@ function App() {
       onSuccess: (data: UserState) => {
         setLoggedUser(data);
         dispatch(setUser(data));
+
         setLoading(false);
       },
       onError: (err) => {
         setLoading(false);
-        console.log(err);
       },
     }
   );
@@ -62,6 +64,8 @@ function App() {
                     path="/create-restaurant"
                     element={<CreateRestaurant />}
                   />
+                  <Route path="/subscription" element={<Subscription />} />
+                  <Route path="/subscription/payment" element={<Payment />} />
                   {/* Future routes */}
                   {/* 
                 <Route path="/current-reservations" element={< />} />    

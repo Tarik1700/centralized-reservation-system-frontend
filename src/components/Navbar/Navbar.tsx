@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import logoWithText from '../svg/logoWithText.svg';
-import { useSelector } from 'react-redux';
-import { UserState } from '../../features/auth/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserState, logoutUser } from '../../features/auth/userSlice';
 import { RootState } from '../../store';
 import TOKEN from '../../helpers/api/token';
 import { Outlet, useNavigate } from 'react-router-dom';
 import logoWithText2 from '../svg/logoOnlyText2.svg';
 import logoWithoutText from '../svg/logoWithoutText.svg';
+import { ClipLoader } from 'react-spinners';
 
 const Navbar = () => {
   const [sidebarStatus, setSidebarStatus] = useState<boolean>(false);
   const [smallScreen, setSmallScreen] = useState<boolean>(false);
   const loggedUser: UserState = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (window.innerWidth < 640) {
@@ -21,8 +23,13 @@ const Navbar = () => {
   }, []);
 
   const handleLogOut = () => {
-    TOKEN.remove();
     navigate('/login');
+    dispatch(logoutUser());
+  };
+
+  const navigateTo = (page: string) => {
+    navigate('/' + page);
+    if (smallScreen) setSidebarStatus(false);
   };
 
   return (
@@ -76,7 +83,17 @@ const Navbar = () => {
         <div className=" mr-4 bg-[#D7D7D7] w-12 h-12 self-center align-center rounded-full flex justify-center items-center hover:cursor-pointer">
           <div className=" bg-[#F3F3F3] w-[45px] h-[45px] rounded-full flex justify-center items-center">
             <span className="text-[#157635] text-xl font-medium">
-              {loggedUser.user.name[0] + loggedUser.user.surname[0]}
+              {loggedUser.user.name !== '' ? (
+                loggedUser.user.name[0] + loggedUser.user.surname[0]
+              ) : (
+                <ClipLoader
+                  size={30}
+                  color={'green'}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                  className="mt-2"
+                />
+              )}
             </span>
           </div>
         </div>
@@ -101,10 +118,7 @@ const Navbar = () => {
           />
           <ul className="space-y-2 font-medium">
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('dashboard')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -122,10 +136,7 @@ const Navbar = () => {
               </div>
             </li>
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('dashboard')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -145,10 +156,7 @@ const Navbar = () => {
               </div>
             </li>
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('dashboard')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -169,10 +177,7 @@ const Navbar = () => {
               </div>
             </li>
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('dashboard')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -193,10 +198,7 @@ const Navbar = () => {
               </div>
             </li>
             <li
-              onClick={() => {
-                navigate('/create-restaurant');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('create-restaurant')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -219,10 +221,7 @@ const Navbar = () => {
               </div>
             </li>
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('dashboard')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -263,10 +262,7 @@ const Navbar = () => {
           </ul>
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('subscription')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
@@ -311,10 +307,7 @@ const Navbar = () => {
               </a>
             </li> */}
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('dashboard')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
@@ -331,10 +324,7 @@ const Navbar = () => {
               </div>
             </li>
             <li
-              onClick={() => {
-                navigate('/dashboard');
-                setSidebarStatus(false);
-              }}
+              onClick={() => navigateTo('dashboard')}
               className="hover:cursor-pointer"
             >
               <div className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
