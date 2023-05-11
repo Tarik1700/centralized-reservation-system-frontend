@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Divider } from "../components/Divider/Divider";
-import { InputWithIcon } from "../components/InputWithIcon/InputWithIcon";
-import api from "../helpers/api/api.factory";
-import { useMutation } from "react-query";
+import React, { useState } from 'react';
+import { Divider } from '../components/Divider/Divider';
+import { InputWithIcon } from '../components/InputWithIcon/InputWithIcon';
+import api from '../helpers/api/api.factory';
+import { useMutation } from 'react-query';
 import {
   ToastHelper,
   ToastMessageType,
   ToastType,
-} from "../helpers/ToastHelper";
-import axios from "axios";
-import Select from "../components/Select/Select";
-import { Label } from "../components/Label/Label";
-import { TwButton } from "../components/TwButton/TwButton";
+} from '../helpers/ToastHelper';
+import axios from 'axios';
+import Select from '../components/Select/Select';
+import { Label } from '../components/Label/Label';
+import { TwButton } from '../components/TwButton/TwButton';
 interface MenuItem {
   itemName: string;
   itemDescription: string;
@@ -26,36 +26,36 @@ export enum Category {
   DESSERT,
 }
 const options = [
-  { value: "US", label: "United States" },
-  { value: "CA", label: "Canada" },
-  { value: "FR", label: "France" },
-  { value: "DE", label: "Germany" },
+  { value: 'US', label: 'United States' },
+  { value: 'CA', label: 'Canada' },
+  { value: 'FR', label: 'France' },
+  { value: 'DE', label: 'Germany' },
 ];
 
 const menuItemTypeOptions = [
-  { value: 0, label: "BEVERAGE" },
-  { value: 1, label: "SAVORY" },
-  { value: 2, label: "DESSERT" },
+  { value: 0, label: 'BEVERAGE' },
+  { value: 1, label: 'SAVORY' },
+  { value: 2, label: 'DESSERT' },
 ];
 
 const CreateRestaurant = () => {
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [description, setDescription] = useState("");
-  const [capacity, setCapacity] = useState("");
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [description, setDescription] = useState('');
+  const [capacity, setCapacity] = useState('');
   const [municipality, setMunicipality] = useState(options[0].value);
-  const [imgUrl, setImgUrl] = useState("");
-  const [workDaysFrom, setWorkDaysFrom] = useState("");
-  const [workDaysTo, setWorkDaysTo] = useState("");
+  const [imgUrl, setImgUrl] = useState('');
+  const [workDaysFrom, setWorkDaysFrom] = useState('');
+  const [workDaysTo, setWorkDaysTo] = useState('');
   /*  const [weekendDaysFrom, setWeekendDaysFrom] = useState("");
   const [weekendDaysTo, setWeekendDaysTo] = useState(""); */
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [itemName, setItemName] = useState("");
-  const [itemDescription, setItemDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [itemName, setItemName] = useState('');
+  const [itemDescription, setItemDescription] = useState('');
+  const [price, setPrice] = useState('');
   const [category, setCategory] = useState<Category>(0);
-  const [itemImgUrl, setItemImgUrl] = useState("");
+  const [itemImgUrl, setItemImgUrl] = useState('');
 
   const addMenuItem = () => {
     const newItem: MenuItem = {
@@ -66,16 +66,16 @@ const CreateRestaurant = () => {
       itemImgUrl,
     };
     setMenuItems([...menuItems, newItem]);
-    setItemName("");
-    setItemDescription("");
-    setPrice("");
+    setItemName('');
+    setItemDescription('');
+    setPrice('');
     setCategory(0);
-    setItemImgUrl("");
+    setItemImgUrl('');
   };
 
   const { mutate } = useMutation(
     () =>
-      api.fetch<any>("create_restaurant", {
+      api.fetch<any>('create_restaurant', {
         name,
         location,
         phoneNumber,
@@ -90,7 +90,7 @@ const CreateRestaurant = () => {
     {
       onSuccess: (res: any) => {
         ToastHelper.showToast(
-          "Restaurant created successfully",
+          'Restaurant created successfully',
           ToastType.SUCCESS,
           ToastMessageType.CUSTOM
         );
@@ -121,7 +121,7 @@ const CreateRestaurant = () => {
     setCategory(Number(event.target.value));
   };
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center sm:justify-start sm:mt-3">
       <form
         className="mx-6 my-4 flex flex-col gap-4 max-w-[500px] w-full"
         onSubmit={handleSubmit}

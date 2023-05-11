@@ -1,17 +1,20 @@
-import Login from "./components/Login/Login";
-import "./App.css";
-import Render from "./components/AfterLogin/Render";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import NavBarLayout from "./components/NavBarLayout/NavBarLayout";
-import { useState } from "react";
-import TOKEN from "./helpers/api/token";
-import RestaurantInformation from "./pages/RestaurantInformation/RestaurantInformation";
-import Register from "./components/Register/Register";
-import { useDispatch } from "react-redux";
-import { useQuery } from "react-query";
-import { UserState, setUser } from "./features/auth/userSlice";
-import api from "./helpers/api/api.factory";
-import CreateRestaurant from "./pages/CreateRestaurant";
+import Login from './components/Login/Login';
+import './App.css';
+import Render from './components/AfterLogin/Render';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import NavBarLayout from './components/NavBarLayout/NavBarLayout';
+import { useState } from 'react';
+import TOKEN from './helpers/api/token';
+import RestaurantInformation from './pages/RestaurantInformation/RestaurantInformation';
+import Register from './components/Register/Register';
+import { useDispatch } from 'react-redux';
+import { useQuery } from 'react-query';
+import { UserState, setUser } from './features/auth/userSlice';
+import api from './helpers/api/api.factory';
+import CreateRestaurant from './pages/CreateRestaurant';
+import Navbar from './components/Navbar/Navbar';
+import Subscription from './pages/Subscription/Subscription';
+import Payment from './pages/Subscription/Payment';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
@@ -20,26 +23,25 @@ function App() {
   const dispatch = useDispatch();
 
   const userInfo = useQuery(
-    ["get_user_info"],
-    () => api.fetch("get_user_info"),
+    ['get_user_info'],
+    () => api.fetch('get_user_info'),
     {
       onSuccess: (data: UserState) => {
         setLoggedUser(data);
         dispatch(setUser(data));
+
         setLoading(false);
       },
       onError: (err) => {
         setLoading(false);
-        console.log(err);
       },
     }
   );
   const redirectUserToLogin = () => {
     const path = window.location.pathname;
-    console.log(loggedUser);
     if (!loggedUser && !TOKEN.get()) {
-      if (path !== "/register" && path !== "/login") {
-        window.location.pathname = "/login";
+      if (path !== '/register' && path !== '/login') {
+        window.location.pathname = '/login';
       }
     }
   };
@@ -49,19 +51,23 @@ function App() {
         <Routes>
           <>
             {loggedUser && (
-              <Route element={<NavBarLayout />}>
-                <Route path="/dashboard" element={<Render />} />
-                <Route
-                  /*path="/dashboard/restaurant/:id"  This is the path that we need to use in the future  */
-                  path="/dashboard/restaurant"
-                  element={<RestaurantInformation />}
-                />
-                <Route
-                  path="/create-restaurant"
-                  element={<CreateRestaurant />}
-                />
-                {/* Future routes */}
-                {/* 
+              <Route element={<Navbar />}>
+                <>
+                  <Route path="/dashboard" element={<Render />} />
+                  {/* <Route path="/test" element={< />}></Route> */}
+                  <Route
+                    /*path="/dashboard/restaurant/:id"  This is the path that we need to use in the future  */
+                    path="/dashboard/restaurant"
+                    element={<RestaurantInformation />}
+                  />
+                  <Route
+                    path="/create-restaurant"
+                    element={<CreateRestaurant />}
+                  />
+                  <Route path="/subscription" element={<Subscription />} />
+                  <Route path="/subscription/payment" element={<Payment />} />
+                  {/* Future routes */}
+                  {/* 
                 <Route path="/current-reservations" element={< />} />    
                 <Route path="/reservation-history" element={< />} />
                 <Route path="/current-reservations" element={< />} />
@@ -69,6 +75,8 @@ function App() {
                 <Route path="/my-restaurants/:id/edit" element={< />} />   
            
               */}
+                </>
+                //{' '}
               </Route>
             )}
             <Route path="/register" element={<Register />} />
