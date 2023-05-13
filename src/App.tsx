@@ -15,9 +15,14 @@ import CreateRestaurant from './pages/CreateRestaurant';
 import Navbar from './components/Navbar/Navbar';
 import Subscription from './pages/Subscription/Subscription';
 import Payment from './pages/Subscription/Payment';
+import {
+  RestaurantState,
+  setRestaurant,
+} from './features/restaurants/restaurantSlice';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
+  const [restaurants, setRestaurants] = useState<RestaurantState>();
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -29,7 +34,17 @@ function App() {
       onSuccess: (data: UserState) => {
         setLoggedUser(data);
         dispatch(setUser(data));
+      },
+      onError: (err) => {},
+    }
+  );
 
+  const restaurantsInfo = useQuery(
+    ['get_restaurants'],
+    () => api.fetch('get_restaurants'),
+    {
+      onSuccess: (data: RestaurantState) => {
+        dispatch(setRestaurant(data));
         setLoading(false);
       },
       onError: (err) => {
@@ -37,6 +52,7 @@ function App() {
       },
     }
   );
+
   const redirectUserToLogin = () => {
     const path = window.location.pathname;
     if (!loggedUser && !TOKEN.get()) {
