@@ -12,12 +12,18 @@ import axios from 'axios';
 import Select from '../components/Select/Select';
 import { Label } from '../components/Label/Label';
 import { TwButton } from '../components/TwButton/TwButton';
+import closeButton from '../assets/images/deletetable.png';
+import { useNavigate } from 'react-router';
+
 interface MenuItem {
-  itemName: string;
-  itemDescription: string;
+  name: string;
   price: string;
-  category: Category;
-  itemImgUrl: string;
+  category: string;
+  image: string;
+}
+
+interface TableCapacity {
+  capacity: number;
 }
 
 export enum Category {
@@ -26,52 +32,76 @@ export enum Category {
   DESSERT,
 }
 const options = [
-  { value: 'US', label: 'United States' },
-  { value: 'CA', label: 'Canada' },
-  { value: 'FR', label: 'France' },
-  { value: 'DE', label: 'Germany' },
+  { value: 'Centar', label: 'Centar' },
+  { value: 'Hadžići', label: 'Hadžići' },
+  { value: 'Ilidža', label: 'Ilidža' },
+  { value: 'Ilijaš', label: 'Ilijaš' },
+  { value: 'Novi Grad', label: 'Novi Grad' },
+  { value: 'Novo Sarajevo', label: 'Novo Sarajevo' },
+  { value: 'Stari Grad', label: 'Stari Grad' },
+  { value: 'Trnovo', label: 'Trnovo' },
+  { value: 'Vogošća', label: 'Vogošća' },
 ];
 
 const menuItemTypeOptions = [
-  { value: 0, label: 'BEVERAGE' },
-  { value: 1, label: 'SAVORY' },
-  { value: 2, label: 'DESSERT' },
+  { value: 'BEVERAGE', label: 'BEVERAGE' },
+  { value: 'SAVORY', label: 'SAVORY' },
+  { value: 'DESSERT', label: 'DESSERT' },
 ];
 
 const CreateRestaurant = () => {
   const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState({
+    address: '',
+    municipality: options[0].value,
+    city: 'Sarajevo',
+  });
   const [phoneNumber, setPhoneNumber] = useState('');
   const [description, setDescription] = useState('');
-  const [capacity, setCapacity] = useState('');
-  const [municipality, setMunicipality] = useState(options[0].value);
-  const [imgUrl, setImgUrl] = useState('');
-  const [workDaysFrom, setWorkDaysFrom] = useState('');
-  const [workDaysTo, setWorkDaysTo] = useState('');
-  /*  const [weekendDaysFrom, setWeekendDaysFrom] = useState("");
-  const [weekendDaysTo, setWeekendDaysTo] = useState(""); */
+  const [capacity, setCapacity] = useState<number>(0);
+  const [image, setImage] = useState('');
+  const [workingHours, setWorkingHours] = useState({
+    openTime: '',
+    closeTime: '',
+  });
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [itemName, setItemName] = useState('');
-  const [itemDescription, setItemDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [category, setCategory] = useState<Category>(0);
-  const [itemImgUrl, setItemImgUrl] = useState('');
+  const [category, setCategory] = useState('');
+  const [itemImage, setItemImage] = useState('');
+  const [tables, setTables] = useState<TableCapacity[]>([]);
 
   const addMenuItem = () => {
     const newItem: MenuItem = {
-      itemName,
-      itemDescription,
+      name: itemName,
       price,
       category,
-      itemImgUrl,
+      image: itemImage,
     };
-    setMenuItems([...menuItems, newItem]);
+    setMenuItems((menuItems) => [...menuItems, newItem]);
+    console.log(menuItems);
+
     setItemName('');
-    setItemDescription('');
     setPrice('');
-    setCategory(0);
-    setItemImgUrl('');
+    setCategory('');
+    setItemImage('');
   };
+
+  const addTable = () => {
+    const newTable: TableCapacity = {
+      capacity,
+    };
+    setTables((tables) => [...tables, newTable]);
+    setCapacity(0);
+  };
+
+  const deleteTable = (tableIndex: number) => {
+    setTables((tables) =>
+      tables.filter((table, index) => index !== tableIndex)
+    );
+  };
+
+  const navigate = useNavigate();
 
   const { mutate } = useMutation(
     () =>
@@ -81,12 +111,12 @@ const CreateRestaurant = () => {
         phoneNumber,
         description,
         capacity,
-        municipality,
-        imgUrl,
-        workDaysFrom,
-        workDaysTo,
+        image,
+        workingHours,
         menuItems,
+        tables,
       }),
+
     {
       onSuccess: (res: any) => {
         ToastHelper.showToast(
@@ -94,6 +124,7 @@ const CreateRestaurant = () => {
           ToastType.SUCCESS,
           ToastMessageType.CUSTOM
         );
+        navigate('/dashboard');
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
@@ -113,13 +144,17 @@ const CreateRestaurant = () => {
   };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setMunicipality(event.target.value);
+    setLocation((location) => ({
+      ...location,
+      municipality: event.target.value,
+    }));
   };
   const handleSelectMenuItemTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setCategory(Number(event.target.value));
+    setCategory(event.target.value);
   };
+
   return (
     <div className="flex justify-center sm:justify-start sm:mt-3">
       <form
@@ -155,9 +190,12 @@ const CreateRestaurant = () => {
             placeholder="Location"
             className="block w-full p-4"
             required
-            value={location}
+            value={location.address}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setLocation(event.target.value)
+              setLocation((location) => ({
+                ...location,
+                address: event.target.value,
+              }))
             }
             inputBaseClasses="text-gray-900 border-gray-300 bg-gray-50  text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             inputErrorClasses="border-red-500"
@@ -168,7 +206,7 @@ const CreateRestaurant = () => {
             inputSizing="py-4 px-4"
           />
           <InputWithIcon
-            type="tel"
+            type="number"
             name="Phone number"
             placeholder="Phone number"
             className="block w-full p-4 "
@@ -196,28 +234,11 @@ const CreateRestaurant = () => {
             }
             rows={5}
           />
-          <InputWithIcon
-            type="text"
-            name="Capacity"
-            placeholder="Capacity"
-            className="block w-full p-4 "
-            required
-            value={capacity}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setCapacity(event.target.value)
-            }
-            inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            inputErrorClasses="border-red-500"
-            inputSuccessClasses="border-green-500"
-            labelBaseClasses="text-gray-900"
-            labelErrorClasses="text-red-500"
-            labelSuccessClasses="text-green-500"
-            inputSizing="py-4 px-4"
-          />
+
           <Select
             label="Select a municipality"
             options={options}
-            value={municipality}
+            value={location.municipality}
             onChange={handleSelectChange}
           />
         </div>
@@ -226,15 +247,15 @@ const CreateRestaurant = () => {
         <Divider />
         <p>Restaurant works on regular days</p>
         <div>
-          <Label htmlFor="workDaysFrom" className="" text="From:" />
+          <Label htmlFor="openTime" className="" text="From:" />
           <InputWithIcon
-            name="workDaysFrom"
+            name="openTime"
             placeholder="Work days from"
             className="block w-full p-4 "
             required
-            value={workDaysFrom}
+            value={workingHours.openTime}
             type="time"
-            id="workDaysFrom"
+            id="openTime"
             inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             inputErrorClasses="border-red-500"
             inputSuccessClasses="border-green-500"
@@ -243,18 +264,21 @@ const CreateRestaurant = () => {
             labelSuccessClasses="text-green-500"
             inputSizing="py-4 px-4"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setWorkDaysFrom(event.target.value)
+              setWorkingHours((workingHours) => ({
+                ...workingHours,
+                openTime: event.target.value,
+              }))
             }
           />
-          <Label htmlFor="workDaysTo" className="" text="To:" />
+          <Label htmlFor="closeTime" className="" text="To:" />
           <InputWithIcon
-            name="workDaysTo"
+            name="closeTime"
             placeholder="Work days from"
             className="block w-full p-4 "
             required
-            value={workDaysTo}
+            value={workingHours.closeTime}
             type="time"
-            id="workDaysTo"
+            id="closeTime"
             inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             inputErrorClasses="border-red-500"
             inputSuccessClasses="border-green-500"
@@ -263,56 +287,14 @@ const CreateRestaurant = () => {
             labelSuccessClasses="text-green-500"
             inputSizing="py-4 px-4"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setWorkDaysTo(event.target.value)
+              setWorkingHours((workingHours) => ({
+                ...workingHours,
+                closeTime: event.target.value,
+              }))
             }
           />
         </div>
-        {/*   <div>
-        <p>Restaurant works on weekends</p>
-        <p className="text-[10px]">(Leave both fields empty if it is closed)</p>
-      </div>
-      <div>
-        <Label htmlFor="weekendDaysFrom" className="" text="From:" />
-        <InputWithIcon
-          name="weekendDaysFrom"
-          placeholder="Work days from"
-          className="block w-full p-4 "
-          required
-          value={weekendDaysFrom}
-          type="time"
-          id="weekendDaysFrom"
-          inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-          inputErrorClasses="border-red-500"
-          inputSuccessClasses="border-green-500"
-          labelBaseClasses="text-gray-900"
-          labelErrorClasses="text-red-500"
-          labelSuccessClasses="text-green-500"
-          inputSizing="py-4 px-4"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setWeekendDaysFrom(event.target.value)
-          }
-        />
-        <Label htmlFor="weekendDaysTo" className="" text="To:" />
-        <InputWithIcon
-          name="weekendDaysTo"
-          placeholder="Work days from"
-          className="block w-full p-4 "
-          required
-          value={weekendDaysTo}
-          type="time"
-          id="weekendDaysTo"
-          inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-          inputErrorClasses="border-red-500"
-          inputSuccessClasses="border-green-500"
-          labelBaseClasses="text-gray-900"
-          labelErrorClasses="text-red-500"
-          labelSuccessClasses="text-green-500"
-          inputSizing="py-4 px-4"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setWeekendDaysTo(event.target.value)
-          }
-        />
-      </div> */}
+
         <Divider />
         <h2 className="text-2xl text-left px-3 pb-3 text-black">
           Upload images
@@ -321,13 +303,13 @@ const CreateRestaurant = () => {
         <div>
           <InputWithIcon
             type="text"
-            name="imgUrl"
+            name="image"
             placeholder="Image url"
             className="block w-full p-4 "
             required
-            value={imgUrl}
+            value={image}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setImgUrl(event.target.value)
+              setImage(event.target.value)
             }
             inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             inputErrorClasses="border-red-500"
@@ -338,6 +320,55 @@ const CreateRestaurant = () => {
             inputSizing="py-4 px-4"
           />
         </div>
+        <Divider />
+        <h2 className="text-2xl text-left px-3 pb-3 text-black">Add tables</h2>
+
+        {tables.map((item, index) => (
+          <div
+            key={index}
+            className=" flex  gap-3 p-2 border border-solid border-[#d2d2d2] rounded-lg text-left"
+          >
+            <div className="p-2 w-[90%] bg-white rounded-lg  border border-solid border-gray-300 flex flex-row justify-between">
+              <p>Table {index + 1} capacity: </p>
+              <p>{item.capacity}</p>
+            </div>
+
+            <div
+              className="self-center justify-center"
+              onClick={() => deleteTable(index)}
+            >
+              <img src={closeButton} className="w-4 h-4" alt="" />
+            </div>
+          </div>
+        ))}
+
+        <div className="flex">
+          <InputWithIcon
+            name="table"
+            type="number"
+            value={capacity.toString()}
+            onChange={(e) => setCapacity(e.target.valueAsNumber)}
+            placeholder="Table capacity"
+            inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+            inputErrorClasses="border-red-500"
+            inputSuccessClasses="border-green-500"
+            labelBaseClasses="text-gray-900"
+            labelErrorClasses="text-red-500"
+            labelSuccessClasses="text-green-500"
+            inputSizing="py-4 px-4"
+          />
+
+          <TwButton
+            variation="primary"
+            color="#046C4E"
+            onClick={addTable}
+            type="button"
+            className="w-[60%] ml-2 whitespace-nowrap"
+          >
+            Add Table
+          </TwButton>
+        </div>
+
         <Divider />
         <h2 className="text-2xl text-left px-3 pb-3 text-black">Create menu</h2>
 
@@ -348,21 +379,18 @@ const CreateRestaurant = () => {
               className=" flex flex-col gap-3 p-2 border border-solid border-[#d2d2d2] rounded-lg text-left"
             >
               <div className="p-2 bg-white rounded-lg  border border-solid border-gray-300">
-                <p>{item.itemName}</p>
-              </div>
-              <div className="p-2 bg-white rounded-lg  border border-solid border-gray-300">
-                <p>{item.itemDescription}</p>
+                <p>{item.name}</p>
               </div>
               <div className="p-2 bg-white rounded-lg  border border-solid border-gray-300 flex flex-row justify-between">
                 <p>{item.price}</p>
                 <p>KM</p>
               </div>
               <div className="p-2 bg-white rounded-lg  border border-solid border-gray-300">
-                <p>{Category[item.category]}</p>
+                <p>{item.category}</p>
               </div>
               <div className=" flex justify-center">
                 <img
-                  src={item.itemImgUrl}
+                  src={item.image}
                   alt="menu item url"
                   className="rounded-lg w-[80px] h-[80px] object-fill"
                 />
@@ -383,20 +411,7 @@ const CreateRestaurant = () => {
             labelSuccessClasses="text-green-500"
             inputSizing="py-4 px-4"
           />
-          <InputWithIcon
-            name="itemDescription"
-            type="text"
-            value={itemDescription}
-            onChange={(e) => setItemDescription(e.target.value)}
-            placeholder="Description"
-            inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            inputErrorClasses="border-red-500"
-            inputSuccessClasses="border-green-500"
-            labelBaseClasses="text-gray-900"
-            labelErrorClasses="text-red-500"
-            labelSuccessClasses="text-green-500"
-            inputSizing="py-4 px-4"
-          />
+
           <InputWithIcon
             name="price"
             type="text"
@@ -412,16 +427,16 @@ const CreateRestaurant = () => {
             inputSizing="py-4 px-4"
           />
           <Select
-            label="Select a municipality"
+            label="Select item category"
             options={menuItemTypeOptions}
             value={category}
             onChange={handleSelectMenuItemTypeChange}
           />
           <InputWithIcon
-            name="itemImgUrl"
+            name="itemimage"
             type="text"
-            value={itemImgUrl}
-            onChange={(e) => setItemImgUrl(e.target.value)}
+            value={itemImage}
+            onChange={(e) => setItemImage(e.target.value)}
             placeholder="Item Image Url"
             inputBaseClasses=" text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             inputErrorClasses="border-red-500"
