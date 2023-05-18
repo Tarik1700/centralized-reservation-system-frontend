@@ -72,11 +72,13 @@ const Navbar = () => {
             className="w-10 h-12 pt-1 rounded-full mr-1"
             alt="LOGOONY TEXT"
             style={{ marginLeft: 0 }}
+            onClick={() => navigateTo('dashboard')}
           />
           <img
             src={logoWithText2}
             alt="LOGOONY TEXT"
             style={{ marginLeft: 0 }}
+            onClick={() => navigateTo('dashboard')}
           />
         </div>
 
@@ -347,9 +349,12 @@ const Navbar = () => {
           </ul>
         </div>
       </aside>
-      <div className=" sm:p-4 sm:pt-0 sm:pr-0 pt-0 pb-4 px-4 sm:ml-64">
+      <div className=" sm:p-4 sm:pt-0 sm:pr-0 pt-0 pb-4  sm:ml-64">
         <Outlet />
       </div>
+      {/* <div className=" sm:p-4 sm:pt-0 sm:pr-0 pt-0 pb-4 px-4 sm:ml-64">
+        <Outlet />
+      </div> */}
     </>
   );
 };

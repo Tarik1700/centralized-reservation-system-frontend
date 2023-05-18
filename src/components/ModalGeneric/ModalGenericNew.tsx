@@ -45,7 +45,7 @@ export const ModalGenericNew: React.FC<ModalProps> = ({
   return (
     <div
       className={twMerge(
-        "fixed inset-0 flex justify-center z-49",
+        "fixed inset-0 flex justify-center z-[100]",
         modalClassName,
         positionClasses[position]
       )}

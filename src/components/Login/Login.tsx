@@ -35,7 +35,7 @@ const Login = () => {
             loginError(error.message);
           }
           if (error.response) {
-            return loginError(error.response.data);
+            return loginError(error.message);
           }
         }
       },

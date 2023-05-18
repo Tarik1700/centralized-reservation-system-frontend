@@ -37,7 +37,7 @@ const Payment = () => {
 
   return (
     <div>
-      <div className="mt-8">
+      <div className="mt-8 mx-4">
         <h2 className="font-medium text-2xl ">Payment</h2>
         <p className="text-sm mt-2 text-[#9D9D9D]">
           All information should be provided in order to achieve successful
