@@ -72,11 +72,13 @@ const Navbar = () => {
             className="w-10 h-12 pt-1 rounded-full mr-1"
             alt="LOGOONY TEXT"
             style={{ marginLeft: 0 }}
+            onClick={() => navigateTo('dashboard')}
           />
           <img
             src={logoWithText2}
             alt="LOGOONY TEXT"
             style={{ marginLeft: 0 }}
+            onClick={() => navigateTo('dashboard')}
           />
         </div>
 

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface Restaurant {
+export interface Restaurant {
   name: string;
   description: string;
   phoneNumber: string;
@@ -10,6 +10,10 @@ interface Restaurant {
     address: string;
     municipality: string;
     city: string;
+  };
+  workingHours: {
+    openTime: string;
+    closeTime: string;
   };
   owner: {
     name: string;
@@ -35,6 +39,10 @@ const initialState: RestaurantState = {
         address: '',
         municipality: '',
         city: '',
+      },
+      workingHours:{
+        openTime: '',
+        closeTime: ''
       },
       owner: {
         name: '',

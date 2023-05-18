@@ -23,6 +23,10 @@ export const ENDPOINTS = {
     uri: '/restaurants',
     method: 'GET',
   },
+  get_restaurant: {
+    uri: '/restaurants/{id}',
+    method: 'GET',
+  },
   create_restaurant: {
     uri: '/restaurants',
     method: 'POST',

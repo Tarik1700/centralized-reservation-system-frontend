@@ -73,7 +73,7 @@ function App() {
                   {/* <Route path="/test" element={< />}></Route> */}
                   <Route
                     /*path="/dashboard/restaurant/:id"  This is the path that we need to use in the future  */
-                    path="/dashboard/restaurant"
+                    path="/dashboard/restaurant/:id"
                     element={<RestaurantInformation />}
                   />
                   <Route

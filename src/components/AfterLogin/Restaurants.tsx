@@ -2,11 +2,13 @@ import { useSelector } from 'react-redux';
 import { RestaurantState } from '../../features/restaurants/restaurantSlice';
 import { RootState } from '../../store';
 import arrow from '../../assets/images/arrow.png';
+import { useNavigate } from 'react-router-dom';
 
 export const Restaurants = () => {
   const restaurants: RestaurantState = useSelector(
     (state: RootState) => state.restaurants
   );
+  const navigate = useNavigate();
 
   return (
     <>
@@ -16,6 +18,7 @@ export const Restaurants = () => {
         {restaurants.restaurantList.map((restaurant) => (
           <div
             key={restaurant.name}
+            onClick={() => navigate('/dashboard/restaurant/' + restaurant.name)}
             className="rounded-xl bg-white lg:mb-0 mb-6 shadow-sm hover:cursor-pointer md:w-[380px] h-full "
           >
             <div className="flex flex-col ">

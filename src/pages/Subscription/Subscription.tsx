@@ -5,7 +5,7 @@ const Subscription = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="mt-8">
+      <div className="mt-8 mx-4">
         <h2 className="font-medium text-2xl ">Subscription</h2>
         <p className="text-sm mt-2 text-[#9D9D9D]">
           To register your restaurants, please complete the payment process.

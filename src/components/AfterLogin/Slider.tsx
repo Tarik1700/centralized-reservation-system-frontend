@@ -6,11 +6,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
+import { useNavigate } from 'react-router-dom';
 
 const Slider = () => {
   const restaurants: RestaurantState = useSelector(
     (state: RootState) => state.restaurants
   );
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -27,7 +30,10 @@ const Slider = () => {
         }}
       >
         {restaurants.restaurantList.map((restaurant) => (
-          <SwiperSlide key={restaurant.name}>
+          <SwiperSlide
+            key={restaurant.name}
+            onClick={() => navigate('/dashboard/restaurant/' + restaurant.name)}
+          >
             <div className="static ">
               <img
                 src={restaurant.image}
