@@ -29,6 +29,7 @@ function App() {
 
   const userInfo = useQuery(
     ['get_user_info'],
+
     () => api.fetch('get_user_info'),
     {
       onSuccess: (data: UserState) => {
@@ -58,6 +59,9 @@ function App() {
     if (!loggedUser && !TOKEN.get()) {
       if (path !== '/register' && path !== '/login') {
         window.location.pathname = '/login';
+        if (path !== '/register' && path !== '/login') {
+          window.location.pathname = '/login';
+        }
       }
     }
   };
@@ -92,7 +96,6 @@ function App() {
            
               */}
                 </>
-                //{' '}
               </Route>
             )}
             <Route path="/register" element={<Register />} />
