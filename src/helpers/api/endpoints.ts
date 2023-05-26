@@ -31,6 +31,14 @@ export const ENDPOINTS = {
     uri: '/restaurants',
     method: 'POST',
   },
+  set_rules: {
+    uri: '/rules/{id}',
+    method: 'POST',
+  },
+  get_owned_restaurants: {
+    uri: '/restaurants/owner',
+    method: 'GET',
+  },
 };
 
 export type ApiEndpoint = keyof typeof ENDPOINTS;
