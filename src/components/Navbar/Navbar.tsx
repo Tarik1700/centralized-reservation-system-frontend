@@ -8,10 +8,12 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import logoWithText2 from '../svg/logoOnlyText2.svg';
 import logoWithoutText from '../svg/logoWithoutText.svg';
 import { ClipLoader } from 'react-spinners';
+import { ModalGenericNew } from '../ModalGeneric/ModalGenericNew';
 
 const Navbar = () => {
   const [sidebarStatus, setSidebarStatus] = useState<boolean>(false);
   const [smallScreen, setSmallScreen] = useState<boolean>(false);
+  const [logoutModal, setLogoutModal] = useState(false);
   const loggedUser: UserState = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,6 +33,8 @@ const Navbar = () => {
     navigate('/' + page);
     if (smallScreen) setSidebarStatus(false);
   };
+
+  const [restaurantTab, setRestaurantTab] = useState(false);
 
   return (
     <>
@@ -83,7 +87,10 @@ const Navbar = () => {
         </div>
 
         <div className=" mr-4 bg-[#D7D7D7] w-12 h-12 self-center align-center rounded-full flex justify-center items-center hover:cursor-pointer">
-          <div className=" bg-[#F3F3F3] w-[45px] h-[45px] rounded-full flex justify-center items-center">
+          <div
+            className=" bg-[#F3F3F3] w-[45px] h-[45px] rounded-full flex justify-center items-center"
+            onClick={() => setLogoutModal((status) => !status)}
+          >
             <span className="text-[#157635] text-xl font-medium">
               {loggedUser.user.name !== '' ? (
                 loggedUser.user.name[0] + loggedUser.user.surname[0]
@@ -101,12 +108,36 @@ const Navbar = () => {
         </div>
       </div>
 
+      {logoutModal && (
+        <div
+          className="flex items-center bg-opacity-75 rounded-b-2xl absolute right-0 bg-[#fbfbf9] z-20 w-56 mr-4 border-b-2 border-r-2 border-l-2 border-solid h-16 "
+          onClick={handleLogOut}
+        >
+          <div className="ml-2 flex">
+            <svg
+              aria-hidden="true"
+              className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+            <div className="ml-2">Log out</div>
+          </div>
+        </div>
+      )}
+
       <aside
         id="separator-sidebar"
         className={
           !sidebarStatus
-            ? 'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full '
-            : 'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-0'
+            ? 'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full  shadow-md '
+            : 'fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-0 shadow-md'
         }
         aria-label="Sidebar"
       >
@@ -199,11 +230,11 @@ const Navbar = () => {
                 <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
               </div>
             </li>
-            <li
-              onClick={() => navigateTo('create-restaurant')}
-              className="hover:cursor-pointer"
-            >
-              <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <li className="hover:cursor-pointer">
+              <div
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => setRestaurantTab((status) => !status)}
+              >
                 <svg
                   aria-hidden="true"
                   className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -211,16 +242,94 @@ const Navbar = () => {
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-                    clipRule="evenodd"
-                  ></path>
+                  <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
                 </svg>
                 <span className="flex-1 ml-3 whitespace-nowrap">
-                  Create restaurant
+                  Restaurant
                 </span>
               </div>
+
+              {restaurantTab && (
+                <div>
+                  <div
+                    className="ml-3"
+                    onClick={() => navigateTo('create-restaurant')}
+                  >
+                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                      <span className="flex-1 ml-2 whitespace-nowrap">
+                        Add restaurant
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="ml-3"
+                    onClick={() => navigateTo('create-restaurant')}
+                  >
+                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+                        ></path>
+                      </svg>
+                      <span className="flex-1 ml-2 whitespace-nowrap">
+                        Edit restaurant
+                      </span>
+                    </div>
+                  </div>
+                  <div className="ml-3" onClick={() => navigateTo('rules')}>
+                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"
+                        ></path>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        ></path>
+                      </svg>
+                      <span className="flex-1 ml-2 whitespace-nowrap">
+                        Manage rules
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </li>
             <li
               onClick={() => navigateTo('dashboard')}

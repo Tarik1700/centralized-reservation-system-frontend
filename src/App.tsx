@@ -9,7 +9,7 @@ import RestaurantInformation from './pages/RestaurantInformation/RestaurantInfor
 import Register from './components/Register/Register';
 import { useDispatch } from 'react-redux';
 import { useQuery } from 'react-query';
-import { UserState, setUser } from './features/auth/userSlice';
+import { UserState, logoutUser, setUser } from './features/auth/userSlice';
 import api from './helpers/api/api.factory';
 import CreateRestaurant from './pages/CreateRestaurant';
 import Navbar from './components/Navbar/Navbar';
@@ -19,6 +19,8 @@ import {
   RestaurantState,
   setRestaurant,
 } from './features/restaurants/restaurantSlice';
+import ManageRules from './components/Rules/ManageRules';
+import RestaurantsCard from './components/RestaurantsCard/RestaurantsCard';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
@@ -84,6 +86,11 @@ function App() {
                     path="/create-restaurant"
                     element={<CreateRestaurant />}
                   />
+                  <Route
+                    path="/rules"
+                    element={<RestaurantsCard cardType="rules" />}
+                  />
+                  <Route path="/rules/:id" element={<ManageRules />} />
                   <Route path="/subscription" element={<Subscription />} />
                   <Route path="/subscription/payment" element={<Payment />} />
                   {/* Future routes */}

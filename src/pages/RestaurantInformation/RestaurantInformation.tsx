@@ -18,12 +18,13 @@ import api from '../../helpers/api/api.factory';
 import { useQuery } from 'react-query';
 import { Restaurant } from '../../features/restaurants/restaurantSlice';
 import { ClipLoader } from 'react-spinners';
+import searchAsset from '../../assets/images/search.svg';
 
 const RestaurantInformation = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>();
   const [menu, setMenu] = useState<IMenu[]>();
   const [loading, setLoading] = useState(true);
-
+  const [notFound, setNotFound] = useState(false);
   const params = useParams();
 
   interface RestaurantDetails {
@@ -41,6 +42,7 @@ const RestaurantInformation = () => {
         setLoading(false);
       },
       onError: (err) => {
+        setNotFound(true);
         setLoading(false);
       },
     }
@@ -102,7 +104,15 @@ const RestaurantInformation = () => {
           className="mt-28 "
         />
       </div>
-      {!loading && (
+      {notFound && (
+        <div className="flex flex-col justify-center mt-24">
+          <img src={searchAsset} alt="" className="h-44 opacity-50" />
+          <p className="text-center text-2xl mt-5 text-gray-400">
+            No result found
+          </p>
+        </div>
+      )}
+      {!loading && !notFound && (
         <div className="text-left bg-[#FBFBF9]">
           <div className="h-44 sm:h-64 xl:h-80 2xl:h-96  ">
             <img
@@ -151,7 +161,11 @@ const RestaurantInformation = () => {
                       </p>
                       <p>
                         <b>Tel: </b>
-                        {restaurant!.phoneNumber}
+                        {restaurant!.phoneNumber.slice(0, 3) +
+                          ' ' +
+                          restaurant!.phoneNumber.slice(3, 6) +
+                          '-' +
+                          restaurant!.phoneNumber.slice(6)}
                       </p>
                       <p>
                         <b>Work hours:</b>
