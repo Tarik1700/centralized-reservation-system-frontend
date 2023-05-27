@@ -6,7 +6,7 @@ interface IProps {
 
 const Menu = ({ menuItem }: IProps) => {
   return (
-    <div className="menu-item mx-4 my-4 border-[#ECECEC] border-[1px] rounded-lg h-32 flex justify-between items-center ">
+    <div className="menu-item mx-4  border-[#ECECEC] border-[1px] rounded-lg h-32 mb-4 flex justify-between items-center ">
       <div className="text-center grow">
         <div className="text-base">{menuItem.name}</div>
         <div className="border-b-[#ECECEC] border-b-[1px]  mx-4 my-3"></div>
