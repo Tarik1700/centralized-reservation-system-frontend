@@ -618,7 +618,7 @@ const RestaurantInformation = () => {
                       })}
                     </div>
                   ) : (
-                    <div>Your did not add items to your order!</div>
+                    <div>You did not add items to your order!</div>
                   )}
                 </ModalGenericNew>
               </div>

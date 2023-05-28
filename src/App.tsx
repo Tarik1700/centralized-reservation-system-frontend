@@ -21,6 +21,8 @@ import {
 } from './features/restaurants/restaurantSlice';
 import ManageRules from './components/Rules/ManageRules';
 import RestaurantsCard from './components/RestaurantsCard/RestaurantsCard';
+import MyReservations from './components/MyReservations/MyReservations';
+import ReservationDetails from './components/ReservationDetails/ReservationDetails';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
@@ -92,6 +94,11 @@ function App() {
                   />
                   <Route path="/rules/:id" element={<ManageRules />} />
                   <Route path="/subscription" element={<Subscription />} />
+                  <Route path="/my-reservations" element={<MyReservations />} />
+                  <Route
+                    path="/my-reservations/:id"
+                    element={<ReservationDetails />}
+                  />
                   <Route path="/subscription/payment" element={<Payment />} />
                   {/* Future routes */}
                   {/* 
