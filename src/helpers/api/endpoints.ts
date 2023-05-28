@@ -43,6 +43,14 @@ export const ENDPOINTS = {
     uri: '/reservations/post1',
     method: 'POST',
   },
+  get_my_reservations: {
+    uri: '/reservations/users/email/{id}',
+    method: 'GET',
+  },
+  get_reservation_details: {
+    uri: '/reservations/{id}',
+    method: 'GET',
+  },
 };
 
 export type ApiEndpoint = keyof typeof ENDPOINTS;
