@@ -39,6 +39,10 @@ export const ENDPOINTS = {
     uri: '/restaurants/owner',
     method: 'GET',
   },
+  post_reservation: {
+    uri: '/reservations/post1',
+    method: 'POST',
+  },
 };
 
 export type ApiEndpoint = keyof typeof ENDPOINTS;
