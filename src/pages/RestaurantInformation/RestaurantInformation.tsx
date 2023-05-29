@@ -44,8 +44,6 @@ const RestaurantInformation = () => {
   }
 
   const handleOrder = (e: IMenu) => {
-    console.log(e);
-    console.log('order; ', order);
     ToastHelper.showToast(
       e.name + ' has been added to your order.',
       ToastType.SUCCESS,
@@ -96,7 +94,6 @@ const RestaurantInformation = () => {
 
   const handleChange = (selectedDate: Date) => {
     setReservationDate(selectedDate);
-    console.log(selectedDate);
   };
   const handleClose = (state: boolean) => {
     setShow(state);
