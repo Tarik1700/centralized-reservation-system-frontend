@@ -2,14 +2,13 @@ import Login from './components/Login/Login';
 import './App.css';
 import Render from './components/AfterLogin/Render';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import NavBarLayout from './components/NavBarLayout/NavBarLayout';
 import { useState } from 'react';
 import TOKEN from './helpers/api/token';
 import RestaurantInformation from './pages/RestaurantInformation/RestaurantInformation';
 import Register from './components/Register/Register';
 import { useDispatch } from 'react-redux';
 import { useQuery } from 'react-query';
-import { UserState, logoutUser, setUser } from './features/auth/userSlice';
+import { UserState, setUser } from './features/auth/userSlice';
 import api from './helpers/api/api.factory';
 import CreateRestaurant from './pages/CreateRestaurant';
 import Navbar from './components/Navbar/Navbar';
@@ -23,10 +22,10 @@ import ManageRules from './components/Rules/ManageRules';
 import RestaurantsCard from './components/RestaurantsCard/RestaurantsCard';
 import MyReservations from './components/MyReservations/MyReservations';
 import ReservationDetails from './components/ReservationDetails/ReservationDetails';
+import EditRestaurant from './components/EditRestaurant/EditRestaurant';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
-  const [restaurants, setRestaurants] = useState<RestaurantState>();
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -78,9 +77,7 @@ function App() {
               <Route element={<Navbar />}>
                 <>
                   <Route path="/dashboard" element={<Render />} />
-                  {/* <Route path="/test" element={< />}></Route> */}
                   <Route
-                    /*path="/dashboard/restaurant/:id"  This is the path that we need to use in the future  */
                     path="/dashboard/restaurant/:id"
                     element={<RestaurantInformation />}
                   />
@@ -92,7 +89,18 @@ function App() {
                     path="/rules"
                     element={<RestaurantsCard cardType="rules" />}
                   />
+
                   <Route path="/rules/:id" element={<ManageRules />} />
+
+                  <Route
+                    path="/edit-restaurant"
+                    element={<RestaurantsCard cardType="restaurant" />}
+                  />
+
+                  <Route
+                    path="/edit-restaurant/:id"
+                    element={<EditRestaurant />}
+                  />
                   <Route path="/subscription" element={<Subscription />} />
                   <Route path="/my-reservations" element={<MyReservations />} />
                   <Route
@@ -100,25 +108,13 @@ function App() {
                     element={<ReservationDetails />}
                   />
                   <Route path="/subscription/payment" element={<Payment />} />
-                  {/* Future routes */}
-                  {/* 
-                <Route path="/current-reservations" element={< />} />    
-                <Route path="/reservation-history" element={< />} />
-                <Route path="/current-reservations" element={< />} />
-                <Route path="/my-restaurants" element={< />} />   
-                <Route path="/my-restaurants/:id/edit" element={< />} />   
-           
-              */}
                 </>
               </Route>
             )}
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Login />} />
-            {/* 
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/landing" element={< />} />
-          */}
+
             {redirectUserToLogin()}
           </>
         </Routes>

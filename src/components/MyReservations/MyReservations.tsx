@@ -41,8 +41,6 @@ const MyReservations = () => {
     () => api.fetch('get_my_reservations', { id: loggedUser.user.email }),
     {
       onSuccess: (data: Reservation[]) => {
-        console.log(data);
-
         setMyReservations(data);
         setLoading(false);
       },

@@ -102,8 +102,6 @@ const ManageRules = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(ruleType, dayOfWeek, discount, groupSize, menuType);
-
     mutate();
   };
 

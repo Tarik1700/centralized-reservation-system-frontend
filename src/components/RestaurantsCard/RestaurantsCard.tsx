@@ -47,9 +47,8 @@ const RestaurantsCard = (props: Props) => {
       </div>
       {notFound && (
         <div className="flex flex-col justify-center mt-24">
-          <img src={searchAsset} alt="" className="h-44 opacity-50" />
           <p className="text-center text-2xl mt-5 text-gray-400">
-            No result found
+            You do not have restaurant added!
           </p>
         </div>
       )}

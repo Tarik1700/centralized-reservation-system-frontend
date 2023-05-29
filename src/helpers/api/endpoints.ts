@@ -51,6 +51,18 @@ export const ENDPOINTS = {
     uri: '/reservations/{id}',
     method: 'GET',
   },
+  edit_restaurant: {
+    uri: '/restaurants',
+    method: 'PUT',
+  },
+  delete_restaurant: {
+    uri: '/restaurants/owner',
+    method: 'DELETE',
+  },
+  get_tables: {
+    uri: '/tables/owner/{id}',
+    method: 'GET',
+  },
 };
 
 export type ApiEndpoint = keyof typeof ENDPOINTS;
