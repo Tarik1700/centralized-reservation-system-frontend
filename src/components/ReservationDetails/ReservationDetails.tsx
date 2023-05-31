@@ -1,36 +1,36 @@
-import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import api from '../../helpers/api/api.factory';
-import { useMutation, useQuery } from 'react-query';
-import { ClipLoader } from 'react-spinners';
-import searchAsset from '../../assets/images/search.svg';
-import { Reservation } from '../MyReservations/MyReservations';
+import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import api from "../../helpers/api/api.factory";
+import { useMutation, useQuery } from "react-query";
+import { ClipLoader } from "react-spinners";
+import search from "../../assets/images/search.svg";
+import { Reservation } from "../MyReservations/MyReservations";
 import {
   ToastHelper,
   ToastMessageType,
   ToastType,
-} from '../../helpers/ToastHelper';
-import axios from 'axios';
+} from "../../helpers/ToastHelper";
+import axios from "axios";
 
 const ReservationDetails = () => {
-  const [reservation, setReservation] = useState<Reservation>();
+  const [reservation, setReservation] = useState<Reservation | undefined>();
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
 
   const { mutate } = useMutation(
-    () => api.fetch<any>('delete_reservation', { id: params.id }),
+    () => api.fetch<any>("delete_reservation", { id: params.id }),
 
     {
       onSuccess: (res: any) => {
         ToastHelper.showToast(
-          'Reservation cancelled successfully',
+          "Reservation cancelled successfully",
           ToastType.SUCCESS,
           ToastMessageType.CUSTOM
         );
-        navigate('/my-reservations');
+        navigate("/my-reservations");
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
@@ -45,8 +45,8 @@ const ReservationDetails = () => {
   );
 
   const reservationDetailsInfo = useQuery(
-    ['get_reservation_details'],
-    () => api.fetch('get_reservation_details', { id: params.id }),
+    ["get_reservation_details"],
+    () => api.fetch("get_reservation_details", { id: params.id }),
     {
       onSuccess: (data: Reservation) => {
         setReservation(data);
@@ -64,7 +64,7 @@ const ReservationDetails = () => {
       <div className="flex justify-center">
         <ClipLoader
           size={120}
-          color={'green'}
+          color={"green"}
           aria-label="Loading Spinner"
           data-testid="loader"
           loading={loading}
@@ -73,7 +73,7 @@ const ReservationDetails = () => {
       </div>
       {notFound && (
         <div className="flex flex-col justify-center mt-24">
-          <img src={searchAsset} alt="" className="h-44 opacity-50" />
+          <img src={search} alt="" className="h-44 opacity-50" />
           <p className="text-center text-2xl mt-5 text-gray-400">
             No result found
           </p>
@@ -96,7 +96,7 @@ const ReservationDetails = () => {
                   <h2 className="text-xl">{reservation!.restaurant!.name}</h2>
                 </div>
                 <div className="text-xs pl-2 mb-2 font-normal text-[#9D9D9D]">
-                  {reservation!.restaurant!.location.address},{' '}
+                  {reservation!.restaurant!.location.address},{" "}
                   {reservation!.restaurant!.location.municipality}
                 </div>
               </div>
@@ -136,7 +136,7 @@ const ReservationDetails = () => {
               </h3>
 
               <p className="text-[#9D9D9D] text-base ml-2 mb-2 pb-4">
-                {reservation?.specialComment !== '' ? (
+                {reservation?.specialComment !== "" ? (
                   reservation?.specialComment
                 ) : (
                   <span className="mb-4">No special requests</span>

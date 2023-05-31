@@ -1,18 +1,22 @@
-import { useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const SearchInput = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    navigate('/dashboard/restaurant/' + search);
+    navigate("/dashboard/restaurant/" + search);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="  mx-auto pt-5">
+    <form
+      onSubmit={handleSubmit}
+      className="  mx-auto pt-5"
+      data-testid="search-form"
+    >
       <div className="relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
