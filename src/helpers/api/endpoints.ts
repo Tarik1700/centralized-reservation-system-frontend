@@ -40,7 +40,7 @@ export const ENDPOINTS = {
     method: 'GET',
   },
   post_reservation: {
-    uri: '/reservations/post1',
+    uri: '/reservations',
     method: 'POST',
   },
   get_my_reservations: {
@@ -62,6 +62,14 @@ export const ENDPOINTS = {
   get_tables: {
     uri: '/tables/owner/{id}',
     method: 'GET',
+  },
+  post_subscription: {
+    uri: '/subscriptions',
+    method: 'POST',
+  },
+  delete_reservation: {
+    uri: '/reservations/{id}',
+    method: 'DELETE',
   },
 };
 

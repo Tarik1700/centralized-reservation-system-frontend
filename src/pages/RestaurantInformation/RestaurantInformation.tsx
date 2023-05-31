@@ -488,7 +488,7 @@ const RestaurantInformation = () => {
                     <span className="ml-2 px-2 text-center bg-gray-100">
                       {reservationDate.getDate() +
                         '.' +
-                        reservationDate.getMonth() +
+                        (reservationDate.getMonth() + 1) +
                         '.' +
                         reservationDate.getFullYear() +
                         '.'}

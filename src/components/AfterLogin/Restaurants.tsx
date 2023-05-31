@@ -14,12 +14,12 @@ export const Restaurants = () => {
     <>
       <h2 className="text-2xl my-4 ">Restaurants</h2>
 
-      <div className="md:flex gap-4 md:justify-center xl:justify-between flex-wrap ">
+      <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {restaurants.restaurantList.map((restaurant) => (
           <div
             key={restaurant.name}
             onClick={() => navigate('/dashboard/restaurant/' + restaurant.name)}
-            className="rounded-xl bg-white lg:mb-0 mb-6 shadow-sm hover:cursor-pointer md:w-[380px] h-full "
+            className="rounded-xl bg-white lg:mb-0 mb-6 shadow-sm hover:cursor-pointer  h-full "
           >
             <div className="flex flex-col ">
               <img

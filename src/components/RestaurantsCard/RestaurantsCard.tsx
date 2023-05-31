@@ -5,7 +5,6 @@ import api from '../../helpers/api/api.factory';
 import { useQuery } from 'react-query';
 import { Restaurant } from '../../features/restaurants/restaurantSlice';
 import { ClipLoader } from 'react-spinners';
-import searchAsset from '../../assets/images/search.svg';
 
 interface Props {
   cardType: string;
@@ -48,7 +47,7 @@ const RestaurantsCard = (props: Props) => {
       {notFound && (
         <div className="flex flex-col justify-center mt-24">
           <p className="text-center text-2xl mt-5 text-gray-400">
-            You do not have restaurant added!
+            You do not have any restaurant added!
           </p>
         </div>
       )}

@@ -29,28 +29,29 @@ const Slider = () => {
           disableOnInteraction: false,
         }}
       >
-        {restaurants.restaurantList.map((restaurant) => (
-          <SwiperSlide
-            key={restaurant.name}
-            onClick={() => navigate('/dashboard/restaurant/' + restaurant.name)}
-          >
-            <div className="static ">
-              <img
-                src={restaurant.image}
-                alt=""
-                className="w-full h-52 object-cover md:h-72"
-              />
+        {restaurants.restaurantList.map((restaurant, index) => {
+          if (index < 5)
+            return (
+              <SwiperSlide
+                key={restaurant.name}
+                onClick={() =>
+                  navigate('/dashboard/restaurant/' + restaurant.name)
+                }
+              >
+                <div className="static ">
+                  <img
+                    src={restaurant.image}
+                    alt=""
+                    className="w-full h-52 object-cover md:h-72"
+                  />
 
-              <div className="absolute bg-black bg-opacity-50 top-0 left-0 rounded-xl mt-3 ml-3 px-3 py-2">
-                <h3 className="text-white">{restaurant.name}</h3>
-              </div>
-
-              {/* <div className=" flex  absolute justify-center items-center  bg-[#64B880] bg-opacity-[85%] bottom-0 right-0 mb-3 mr-3 w-10 h-10 rounded-lg">
-                <img src={arrow} alt="" className="w-4 h-4 rotate-180" />
-              </div> */}
-            </div>
-          </SwiperSlide>
-        ))}
+                  <div className="absolute bg-black bg-opacity-50 top-0 left-0 rounded-xl mt-3 ml-3 px-3 py-2">
+                    <h3 className="text-white">{restaurant.name}</h3>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+        })}
       </Swiper>
     </>
   );

@@ -16,6 +16,7 @@ import closeButton from '../../assets/images/deletetable.png';
 import { useNavigate, useParams } from 'react-router';
 import { Restaurant } from '../../features/restaurants/restaurantSlice';
 import { ClipLoader } from 'react-spinners';
+import { refetchProp } from '../../pages/CreateRestaurant';
 
 interface MenuItem {
   name: string;
@@ -65,7 +66,7 @@ const menuItemTypeOptions = [
   { value: 'DESSERT', label: 'DESSERT' },
 ];
 
-const EditRestaurant = () => {
+const EditRestaurant = ({ refetch }: refetchProp) => {
   const [name, setName] = useState('');
   const [location, setLocation] = useState({
     address: '',
@@ -102,7 +103,7 @@ const EditRestaurant = () => {
 
     setItemName('');
     setPrice('');
-    setCategory('');
+    setCategory('BEVERAGE');
     setItemImage('');
   };
 
@@ -149,6 +150,7 @@ const EditRestaurant = () => {
           ToastType.SUCCESS,
           ToastMessageType.CUSTOM
         );
+        refetch();
         navigate('/dashboard');
       },
       onError: (error) => {
