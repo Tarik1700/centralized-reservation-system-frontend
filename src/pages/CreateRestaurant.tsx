@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { Divider } from '../components/Divider/Divider';
 import { InputWithIcon } from '../components/InputWithIcon/InputWithIcon';
 import api from '../helpers/api/api.factory';
-import { useMutation, useQuery } from 'react-query';
+import {
+  useMutation,
+  useQuery,
+  QueryObserverResult,
+  RefetchQueryFilters,
+} from 'react-query';
 import {
   ToastHelper,
   ToastMessageType,
@@ -16,6 +21,8 @@ import closeButton from '../assets/images/deletetable.png';
 import { useNavigate } from 'react-router';
 import { Restaurant } from '../features/restaurants/restaurantSlice';
 import { ClipLoader } from 'react-spinners';
+import { RefetchOptions } from 'react-query';
+import { RestaurantListResponse } from '../App';
 
 interface MenuItem {
   name: string;
@@ -51,7 +58,13 @@ const menuItemTypeOptions = [
   { value: 'DESSERT', label: 'DESSERT' },
 ];
 
-const CreateRestaurant = () => {
+export interface refetchProp {
+  refetch: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<RestaurantListResponse, unknown>>;
+}
+
+const CreateRestaurant = ({ refetch }: refetchProp) => {
   const [name, setName] = useState('');
   const [location, setLocation] = useState({
     address: '',
@@ -85,7 +98,7 @@ const CreateRestaurant = () => {
     setMenuItems((menuItems) => [...menuItems, newItem]);
     setItemName('');
     setPrice('');
-    setCategory('');
+    setCategory('BEVERAGE');
     setItemImage('');
   };
 
@@ -126,6 +139,7 @@ const CreateRestaurant = () => {
           ToastType.SUCCESS,
           ToastMessageType.CUSTOM
         );
+        refetch();
         navigate('/dashboard');
       },
       onError: (error) => {

@@ -26,6 +26,7 @@ export interface Reservation {
   specialComment: string;
   startTime: string;
   table: Table;
+  deleted: boolean;
 }
 
 const MyReservations = () => {
@@ -76,6 +77,9 @@ const MyReservations = () => {
           <div className="pb-4 px-4 ">
             <h2 className="text-2xl my-6 ">My reservations</h2>
             <div className="lg:flex lg:gap-4 flex-wrap  ">
+              {myReservations?.length === 0 && (
+                <h3>You do not have any reservations!</h3>
+              )}
               {myReservations?.map((reservation) => (
                 <div
                   className="w-full lg:w-[400px] mb-4  bg-white px-4 py-3 rounded-xl shadow-sm hover:cursor-pointer"
@@ -95,7 +99,13 @@ const MyReservations = () => {
                       </p>
                     </div>
 
-                    <div className="justify-self-end self-center h-full ml-3">
+                    {reservation.deleted && (
+                      <div className="text-center cursor:pointer mb-2 font-normal text-xs  bg-[#FF605C] text-white rounded-lg px-2 py-1 self-center">
+                        Cancelled
+                      </div>
+                    )}
+
+                    <div className="justify-self-end self-center h-full ">
                       <div className="bg-[#64B880] bg-opacity-[85%]  rounded-full w-9 h-9 flex justify-center mr-1 mb-2 items-center hover:transition-all hover:scale-95">
                         <img src={arrow} alt="" className="rotate-180 w-5" />
                       </div>

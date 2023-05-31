@@ -1,17 +1,48 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../helpers/api/api.factory';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { ClipLoader } from 'react-spinners';
 import searchAsset from '../../assets/images/search.svg';
 import { Reservation } from '../MyReservations/MyReservations';
+import {
+  ToastHelper,
+  ToastMessageType,
+  ToastType,
+} from '../../helpers/ToastHelper';
+import axios from 'axios';
 
 const ReservationDetails = () => {
   const [reservation, setReservation] = useState<Reservation>();
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const params = useParams();
+  const navigate = useNavigate();
+
+  const { mutate } = useMutation(
+    () => api.fetch<any>('delete_reservation', { id: params.id }),
+
+    {
+      onSuccess: (res: any) => {
+        ToastHelper.showToast(
+          'Reservation cancelled successfully',
+          ToastType.SUCCESS,
+          ToastMessageType.CUSTOM
+        );
+        navigate('/my-reservations');
+      },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          ToastHelper.showToast(
+            error.message,
+            ToastType.ERROR,
+            ToastMessageType.CUSTOM
+          );
+        }
+      },
+    }
+  );
 
   const reservationDetailsInfo = useQuery(
     ['get_reservation_details'],
@@ -59,7 +90,7 @@ const ReservationDetails = () => {
           </div>
 
           <div className="mx-5 mt-3 lg:w-[40%] ">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mb-2">
               <div className="title">
                 <div className="title">
                   <h2 className="text-xl">{reservation!.restaurant!.name}</h2>
@@ -69,6 +100,14 @@ const ReservationDetails = () => {
                   {reservation!.restaurant!.location.municipality}
                 </div>
               </div>
+
+              {reservation?.deleted && (
+                <div>
+                  <button className="cursor:pointer font-normal  bg-[#FF605C] text-white rounded-lg px-3 text-sm py-2">
+                    Cancelled
+                  </button>
+                </div>
+              )}
             </div>
 
             <hr />
@@ -92,22 +131,32 @@ const ReservationDetails = () => {
             <hr />
 
             <div>
-              <h3 className="font-normal text-lg mt-2">Special request:</h3>
+              <h3 className="font-normal text-lg mt-2 pb-2">
+                Special request:
+              </h3>
 
-              <p className="text-[#9D9D9D] text-base ml-2 mb-3">
-                {reservation?.specialComment}
+              <p className="text-[#9D9D9D] text-base ml-2 mb-2 pb-4">
+                {reservation?.specialComment !== '' ? (
+                  reservation?.specialComment
+                ) : (
+                  <span className="mb-4">No special requests</span>
+                )}
               </p>
             </div>
 
-            <hr />
-
-            <div className="pb-2">
-              <h3 className="font-normal text-lg mt-2">Table:</h3>
-
-              <p className="text-[#9D9D9D] whitespace-nowrap text-base ml-2 mb-3 w-[10px] overflow-hidden hover:w-full">
-                {reservation?.table.id}
-              </p>
-            </div>
+            {!reservation?.deleted && (
+              <>
+                <hr />
+                <div className="flex justify-end items-center mt-2 lg:mt-5">
+                  <button
+                    onClick={() => mutate()}
+                    className="cursor:pointer font-normal text-lg bg-[#FF605C] text-white rounded-lg px-4 py-2"
+                  >
+                    Cancel reservation
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

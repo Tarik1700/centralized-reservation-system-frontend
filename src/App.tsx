@@ -23,6 +23,13 @@ import RestaurantsCard from './components/RestaurantsCard/RestaurantsCard';
 import MyReservations from './components/MyReservations/MyReservations';
 import ReservationDetails from './components/ReservationDetails/ReservationDetails';
 import EditRestaurant from './components/EditRestaurant/EditRestaurant';
+import { Restaurant } from './features/restaurants/restaurantSlice';
+
+export interface RestaurantListResponse {
+  _embedded: {
+    restaurantList: Restaurant[];
+  };
+}
 
 function App() {
   const [loggedUser, setLoggedUser] = useState<UserState>();
@@ -43,12 +50,14 @@ function App() {
     }
   );
 
-  const restaurantsInfo = useQuery(
+  const { refetch } = useQuery(
     ['get_restaurants'],
     () => api.fetch('get_restaurants'),
     {
-      onSuccess: (data: RestaurantState) => {
-        dispatch(setRestaurant(data));
+      onSuccess: (data: RestaurantListResponse) => {
+        if (data._embedded)
+          if (data._embedded.restaurantList[0].name !== '')
+            dispatch(setRestaurant(data));
         setLoading(false);
       },
       onError: (err) => {
@@ -83,7 +92,7 @@ function App() {
                   />
                   <Route
                     path="/create-restaurant"
-                    element={<CreateRestaurant />}
+                    element={<CreateRestaurant refetch={refetch} />}
                   />
                   <Route
                     path="/rules"
@@ -99,7 +108,7 @@ function App() {
 
                   <Route
                     path="/edit-restaurant/:id"
-                    element={<EditRestaurant />}
+                    element={<EditRestaurant refetch={refetch} />}
                   />
                   <Route path="/subscription" element={<Subscription />} />
                   <Route path="/my-reservations" element={<MyReservations />} />
