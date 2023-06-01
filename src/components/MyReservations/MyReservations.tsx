@@ -1,15 +1,15 @@
-import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../../helpers/api/api.factory';
-import { useQuery } from 'react-query';
-import { Restaurant } from '../../features/restaurants/restaurantSlice';
-import { ClipLoader } from 'react-spinners';
-import searchAsset from '../../assets/images/search.svg';
-import { UserState } from '../../features/auth/userSlice';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import arrow from '../../assets/images/arrow.png';
+import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../helpers/api/api.factory";
+import { useQuery } from "react-query";
+import { Restaurant } from "../../features/restaurants/restaurantSlice";
+import { ClipLoader } from "react-spinners";
+import searchAsset from "../../assets/images/search.svg";
+import { UserState } from "../../features/auth/userSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import arrow from "../../assets/images/arrow.png";
 
 interface Table {
   capacity: number;
@@ -38,8 +38,8 @@ const MyReservations = () => {
   const navigate = useNavigate();
 
   const myReservationsInfo = useQuery(
-    ['get_my_reservations'],
-    () => api.fetch('get_my_reservations', { id: loggedUser.user.email }),
+    ["get_my_reservations"],
+    () => api.fetch("get_my_reservations", { id: loggedUser.user.email }),
     {
       onSuccess: (data: Reservation[]) => {
         setMyReservations(data);
@@ -57,7 +57,7 @@ const MyReservations = () => {
       <div className="flex justify-center">
         <ClipLoader
           size={120}
-          color={'green'}
+          color={"green"}
           aria-label="Loading Spinner"
           data-testid="loader"
           loading={loading}
@@ -85,7 +85,7 @@ const MyReservations = () => {
                   className="w-full lg:w-[400px] mb-4  bg-white px-4 py-3 rounded-xl shadow-sm hover:cursor-pointer"
                   key={reservation.reservationId}
                   onClick={() => {
-                    navigate('/my-reservations/' + reservation.reservationId);
+                    navigate("/my-reservations/" + reservation.reservationId);
                   }}
                 >
                   <div className="flex justify-between items-center">
@@ -94,7 +94,7 @@ const MyReservations = () => {
                         {reservation.restaurant.name}
                       </h2>
                       <p className="text-[#9D9D9D] text-xs ml-2 mb-3">
-                        {reservation.restaurant.location.address},{' '}
+                        {reservation.restaurant.location.address},{" "}
                         {reservation.restaurant.location.municipality}
                       </p>
                     </div>
@@ -128,6 +128,14 @@ const MyReservations = () => {
                         {reservation.date}, {reservation.startTime.slice(0, 5)}
                       </p>
                     </div>
+                  </div>
+                  <hr />
+                  <div className="pb-2">
+                    <h3 className="font-normal text-lg mt-2">Table:</h3>
+
+                    <p className="text-[#9D9D9D] whitespace-nowrap text-base ml-2 mb-3 w-[10px] overflow-hidden hover:w-full">
+                      {reservation?.table.id}
+                    </p>
                   </div>
                 </div>
               ))}
