@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   ToastHelper,
   ToastMessageType,
   ToastType,
-} from '../../helpers/ToastHelper';
-import 'react-toastify/dist/ReactToastify.css';
-import { InputWithIcon } from '../InputWithIcon/InputWithIcon';
-import { TwButton } from '../TwButton/TwButton';
-import { NavLink, useNavigate } from 'react-router-dom';
-import TOKEN from '../../helpers/api/token';
-import { useMutation } from 'react-query';
-import api from '../../helpers/api/api.factory';
-import axios from 'axios';
+} from "../../helpers/ToastHelper";
+import "react-toastify/dist/ReactToastify.css";
+import { InputWithIcon } from "../InputWithIcon/InputWithIcon";
+import { TwButton } from "../TwButton/TwButton";
+import { NavLink, useNavigate } from "react-router-dom";
+import TOKEN from "../../helpers/api/token";
+import { useMutation } from "react-query";
+import api from "../../helpers/api/api.factory";
+import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const { mutate } = useMutation(
     () =>
-      api.fetch<any>('login_user', {
+      api.fetch<any>("login_user", {
         email,
         password,
       }),
     {
       onSuccess: (res: { token: string }) => {
         TOKEN.set(res.token);
-        navigate('/dashboard');
+        navigate("/dashboard");
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
@@ -53,7 +53,7 @@ const Login = () => {
 
   useEffect(() => {
     if (TOKEN.get()) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
   }, []);
 
@@ -122,12 +122,12 @@ const Login = () => {
               >
                 Log In
               </TwButton>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account?{' '}
+              <div className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Don’t have an account?{" "}
                 <span className="font-medium text-green-600 hover:underline dark:text-green-500">
                   <NavLink to="/register">Sign up here</NavLink>
                 </span>
-              </p>
+              </div>
             </form>
           </div>
         </div>

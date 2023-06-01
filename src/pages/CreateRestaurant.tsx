@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { Divider } from '../components/Divider/Divider';
-import { InputWithIcon } from '../components/InputWithIcon/InputWithIcon';
-import api from '../helpers/api/api.factory';
+import React, { useState } from "react";
+import { Divider } from "../components/Divider/Divider";
+import { InputWithIcon } from "../components/InputWithIcon/InputWithIcon";
+import api from "../helpers/api/api.factory";
 import {
   useMutation,
   useQuery,
   QueryObserverResult,
   RefetchQueryFilters,
-} from 'react-query';
+} from "react-query";
 import {
   ToastHelper,
   ToastMessageType,
   ToastType,
-} from '../helpers/ToastHelper';
-import axios from 'axios';
-import Select from '../components/Select/Select';
-import { Label } from '../components/Label/Label';
-import { TwButton } from '../components/TwButton/TwButton';
-import closeButton from '../assets/images/deletetable.png';
-import { useNavigate } from 'react-router';
-import { Restaurant } from '../features/restaurants/restaurantSlice';
-import { ClipLoader } from 'react-spinners';
-import { RefetchOptions } from 'react-query';
-import { RestaurantListResponse } from '../App';
+} from "../helpers/ToastHelper";
+import axios from "axios";
+import Select from "../components/Select/Select";
+import { Label } from "../components/Label/Label";
+import { TwButton } from "../components/TwButton/TwButton";
+import closeButton from "../assets/images/deletetable.png";
+import { useNavigate } from "react-router";
+import { Restaurant } from "../features/restaurants/restaurantSlice";
+import { ClipLoader } from "react-spinners";
+import { RefetchOptions } from "react-query";
+import { RestaurantListResponse } from "../App";
 
 interface MenuItem {
   name: string;
@@ -41,21 +41,21 @@ export enum Category {
   DESSERT,
 }
 const options = [
-  { value: 'Centar', label: 'Centar' },
-  { value: 'Hadžići', label: 'Hadžići' },
-  { value: 'Ilidža', label: 'Ilidža' },
-  { value: 'Ilijaš', label: 'Ilijaš' },
-  { value: 'Novi Grad', label: 'Novi Grad' },
-  { value: 'Novo Sarajevo', label: 'Novo Sarajevo' },
-  { value: 'Stari Grad', label: 'Stari Grad' },
-  { value: 'Trnovo', label: 'Trnovo' },
-  { value: 'Vogošća', label: 'Vogošća' },
+  { value: "Centar", label: "Centar" },
+  { value: "Hadžići", label: "Hadžići" },
+  { value: "Ilidža", label: "Ilidža" },
+  { value: "Ilijaš", label: "Ilijaš" },
+  { value: "Novi Grad", label: "Novi Grad" },
+  { value: "Novo Sarajevo", label: "Novo Sarajevo" },
+  { value: "Stari Grad", label: "Stari Grad" },
+  { value: "Trnovo", label: "Trnovo" },
+  { value: "Vogošća", label: "Vogošća" },
 ];
 
 const menuItemTypeOptions = [
-  { value: 'BEVERAGE', label: 'BEVERAGE' },
-  { value: 'SAVORY', label: 'SAVORY' },
-  { value: 'DESSERT', label: 'DESSERT' },
+  { value: "BEVERAGE", label: "BEVERAGE" },
+  { value: "SAVORY", label: "SAVORY" },
+  { value: "DESSERT", label: "DESSERT" },
 ];
 
 export interface refetchProp {
@@ -65,25 +65,25 @@ export interface refetchProp {
 }
 
 const CreateRestaurant = ({ refetch }: refetchProp) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [location, setLocation] = useState({
-    address: '',
+    address: "",
     municipality: options[0].value,
-    city: 'Sarajevo',
+    city: "Sarajevo",
   });
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [description, setDescription] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [description, setDescription] = useState("");
   const [capacity, setCapacity] = useState<number>(0);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
   const [workingHours, setWorkingHours] = useState({
-    openTime: '',
-    closeTime: '',
+    openTime: "",
+    closeTime: "",
   });
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [itemName, setItemName] = useState('');
-  const [price, setPrice] = useState('');
-  const [category, setCategory] = useState('BEVERAGE');
-  const [itemImage, setItemImage] = useState('');
+  const [itemName, setItemName] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("BEVERAGE");
+  const [itemImage, setItemImage] = useState("");
   const [tables, setTables] = useState<TableCapacity[]>([]);
   const [isOwner, setIsOwner] = useState(false);
 
@@ -96,10 +96,10 @@ const CreateRestaurant = ({ refetch }: refetchProp) => {
     };
 
     setMenuItems((menuItems) => [...menuItems, newItem]);
-    setItemName('');
-    setPrice('');
-    setCategory('BEVERAGE');
-    setItemImage('');
+    setItemName("");
+    setPrice("");
+    setCategory("BEVERAGE");
+    setItemImage("");
   };
 
   const addTable = () => {
@@ -120,7 +120,7 @@ const CreateRestaurant = ({ refetch }: refetchProp) => {
 
   const { mutate } = useMutation(
     () =>
-      api.fetch<any>('create_restaurant', {
+      api.fetch<any>("create_restaurant", {
         name,
         location,
         phoneNumber,
@@ -135,12 +135,12 @@ const CreateRestaurant = ({ refetch }: refetchProp) => {
     {
       onSuccess: (res: any) => {
         ToastHelper.showToast(
-          'Restaurant created successfully',
+          "Restaurant created successfully",
           ToastType.SUCCESS,
           ToastMessageType.CUSTOM
         );
         refetch();
-        navigate('/dashboard');
+        navigate("/dashboard");
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
@@ -179,8 +179,8 @@ const CreateRestaurant = ({ refetch }: refetchProp) => {
 
   const [loading, setLoading] = useState(true);
   const restaurantsInfo = useQuery(
-    ['get_owned_restaurants'],
-    () => api.fetch('get_owned_restaurants', {}),
+    ["get_owned_restaurants"],
+    () => api.fetch("get_owned_restaurants", {}),
     {
       onSuccess: (data: Restaurant) => {
         if (data) {
@@ -191,6 +191,7 @@ const CreateRestaurant = ({ refetch }: refetchProp) => {
       onError: (err) => {
         setLoading(false);
       },
+      retry: false,
     }
   );
 
@@ -199,7 +200,7 @@ const CreateRestaurant = ({ refetch }: refetchProp) => {
       <div className="flex justify-center">
         <ClipLoader
           size={120}
-          color={'green'}
+          color={"green"}
           aria-label="Loading Spinner"
           data-testid="loader"
           loading={loading}

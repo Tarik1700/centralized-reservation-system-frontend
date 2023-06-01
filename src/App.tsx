@@ -1,29 +1,29 @@
-import Login from './components/Login/Login';
-import './App.css';
-import Render from './components/AfterLogin/Render';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
-import TOKEN from './helpers/api/token';
-import RestaurantInformation from './pages/RestaurantInformation/RestaurantInformation';
-import Register from './components/Register/Register';
-import { useDispatch } from 'react-redux';
-import { useQuery } from 'react-query';
-import { UserState, setUser } from './features/auth/userSlice';
-import api from './helpers/api/api.factory';
-import CreateRestaurant from './pages/CreateRestaurant';
-import Navbar from './components/Navbar/Navbar';
-import Subscription from './pages/Subscription/Subscription';
-import Payment from './pages/Subscription/Payment';
+import Login from "./components/Login/Login";
+import "./App.css";
+import Render from "./components/AfterLogin/Render";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import TOKEN from "./helpers/api/token";
+import RestaurantInformation from "./pages/RestaurantInformation/RestaurantInformation";
+import Register from "./components/Register/Register";
+import { useDispatch } from "react-redux";
+import { useQuery } from "react-query";
+import { UserState, setUser } from "./features/auth/userSlice";
+import api from "./helpers/api/api.factory";
+import CreateRestaurant from "./pages/CreateRestaurant";
+import Navbar from "./components/Navbar/Navbar";
+import Subscription from "./pages/Subscription/Subscription";
+import Payment from "./pages/Subscription/Payment";
 import {
   RestaurantState,
   setRestaurant,
-} from './features/restaurants/restaurantSlice';
-import ManageRules from './components/Rules/ManageRules';
-import RestaurantsCard from './components/RestaurantsCard/RestaurantsCard';
-import MyReservations from './components/MyReservations/MyReservations';
-import ReservationDetails from './components/ReservationDetails/ReservationDetails';
-import EditRestaurant from './components/EditRestaurant/EditRestaurant';
-import { Restaurant } from './features/restaurants/restaurantSlice';
+} from "./features/restaurants/restaurantSlice";
+import ManageRules from "./components/Rules/ManageRules";
+import RestaurantsCard from "./components/RestaurantsCard/RestaurantsCard";
+import MyReservations from "./components/MyReservations/MyReservations";
+import ReservationDetails from "./components/ReservationDetails/ReservationDetails";
+import EditRestaurant from "./components/EditRestaurant/EditRestaurant";
+import { Restaurant } from "./features/restaurants/restaurantSlice";
 
 export interface RestaurantListResponse {
   _embedded: {
@@ -38,9 +38,9 @@ function App() {
   const dispatch = useDispatch();
 
   const userInfo = useQuery(
-    ['get_user_info'],
+    ["get_user_info"],
 
-    () => api.fetch('get_user_info'),
+    () => api.fetch("get_user_info"),
     {
       onSuccess: (data: UserState) => {
         setLoggedUser(data);
@@ -51,12 +51,12 @@ function App() {
   );
 
   const { refetch } = useQuery(
-    ['get_restaurants'],
-    () => api.fetch('get_restaurants'),
+    ["get_restaurants"],
+    () => api.fetch("get_restaurants"),
     {
       onSuccess: (data: RestaurantListResponse) => {
         if (data._embedded)
-          if (data._embedded.restaurantList[0].name !== '')
+          if (data._embedded.restaurantList[0].name !== "")
             dispatch(setRestaurant(data));
         setLoading(false);
       },
@@ -69,10 +69,10 @@ function App() {
   const redirectUserToLogin = () => {
     const path = window.location.pathname;
     if (!loggedUser && !TOKEN.get()) {
-      if (path !== '/register' && path !== '/login') {
-        window.location.pathname = '/login';
-        if (path !== '/register' && path !== '/login') {
-          window.location.pathname = '/login';
+      if (path !== "/register" && path !== "/login") {
+        window.location.pathname = "/login";
+        if (path !== "/register" && path !== "/login") {
+          window.location.pathname = "/login";
         }
       }
     }

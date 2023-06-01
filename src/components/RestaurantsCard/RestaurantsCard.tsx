@@ -1,10 +1,10 @@
-import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../../helpers/api/api.factory';
-import { useQuery } from 'react-query';
-import { Restaurant } from '../../features/restaurants/restaurantSlice';
-import { ClipLoader } from 'react-spinners';
+import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../helpers/api/api.factory";
+import { useQuery } from "react-query";
+import { Restaurant } from "../../features/restaurants/restaurantSlice";
+import { ClipLoader } from "react-spinners";
 
 interface Props {
   cardType: string;
@@ -12,23 +12,24 @@ interface Props {
 
 const RestaurantsCard = (props: Props) => {
   const [restaurant, setRestaurant] = useState<Restaurant>();
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+  /*  const [loading, setLoading] = useState(true); */
+  /*  const [notFound, setNotFound] = useState(false); */
 
   const navigate = useNavigate();
 
-  const restaurantsInfo = useQuery(
-    ['get_owned_restaurants'],
-    () => api.fetch('get_owned_restaurants', {}),
+  const { isLoading } = useQuery(
+    ["get_owned_restaurants"],
+    () => api.fetch("get_owned_restaurants", {}),
     {
       onSuccess: (data: Restaurant) => {
         setRestaurant(data);
-        setLoading(false);
+        /* setLoading(false); */
       },
       onError: (err) => {
-        setNotFound(true);
-        setLoading(false);
+        /*  setNotFound(true); */
+        /* setLoading(false); */
       },
+      retry: false,
     }
   );
 
@@ -37,21 +38,21 @@ const RestaurantsCard = (props: Props) => {
       <div className="flex justify-center">
         <ClipLoader
           size={120}
-          color={'green'}
+          color={"green"}
           aria-label="Loading Spinner"
           data-testid="loader"
-          loading={loading}
+          loading={isLoading}
           className="mt-28 "
         />
       </div>
-      {notFound && (
+      {!restaurant && (
         <div className="flex flex-col justify-center mt-24">
           <p className="text-center text-2xl mt-5 text-gray-400">
             You do not have any restaurant added!
           </p>
         </div>
       )}
-      {!loading && !notFound && (
+      {!isLoading && restaurant && (
         <>
           <div className="pb-4 px-4">
             <h2 className="text-2xl my-6 ">Choose a restaurant</h2>
